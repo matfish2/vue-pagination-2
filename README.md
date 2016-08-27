@@ -1,4 +1,4 @@
-# Vue Pagination
+# Vue Pagination 2
 
 Note: This package is for use with Vuejs 2.
 For version 1 please use [v-pagination](https://www.npmjs.com/package/v-pagination) instead.
