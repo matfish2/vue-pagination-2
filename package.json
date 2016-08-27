@@ -1,7 +1,7 @@
 {
   "name": "vue-pagination-2",
-  "description": "Vue.js pagination component",
-  "version": "0.0.1",
+  "description": "Vue.js 2 pagination component",
+  "version": "0.0.3",
   "keywords": [
     "pagination",
     "vuejs2",
@@ -15,11 +15,11 @@
     "src"
   ],
   "dependencies": {
-    "vue": ">=2.0"
+    "vue": ">=2.0.0-rc.1"
   },
     "browserify": {
     "transform": [
-      "stringify"
+      "vueify"
     ]
   },
   "licenses": "MIT",

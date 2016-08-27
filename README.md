@@ -12,7 +12,7 @@ Presentation is based on bootstrap.
 
 # Dependencies
 
-* Vue.js (>=2.0). Required.
+* Vue.js (>=2.0.0-rc.1). Required.
 * Bootstrap (CSS). Optional.
 
 # Installation

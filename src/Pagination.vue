@@ -44,6 +44,7 @@ class="VuePagination__count">{{count}}</p>
 
 <script>
 import bus from './bus'
+
 export default
 {
   data: function() {
