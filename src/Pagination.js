@@ -1,5 +1,5 @@
-import bus from './bus'
-import template from './template.jsx';
+let bus = require('./bus')
+let template = require('./template.jsx');
 
 module.exports =
 {
