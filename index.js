@@ -1,4 +1,4 @@
-var Pagination = require('./src/Pagination.vue');
+var Pagination = require('./src/Pagination.js');
 
 exports.install = function(Vue) {
 

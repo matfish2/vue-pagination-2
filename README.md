@@ -17,7 +17,7 @@ Presentation is based on bootstrap.
 
 # Installation
 
-Compile the code using `browserify` with `vueify` or `webpack` with `vue-loader`
+Compile the code using a module bundler, such as webpack or browserify, and the [vue jsx transform](https://github.com/vuejs/babel-plugin-transform-vue-jsx)
 
     npm install vue-pagination-2
 
