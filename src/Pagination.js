@@ -36,7 +36,9 @@ module.exports =
       return range(1,parseInt(this.chunk));
     },
     totalPages: function() {
-      return Math.ceil(this.records / this.perPage);
+      var total = Math.ceil(this.records / this.perPage);
+
+      return total?total:1;
     },
     totalChunks: function() {
       return Math.ceil(this.totalPages / this.chunk);
