@@ -48,40 +48,51 @@ module.exports =
     },
     paginationStart: function() {
      return ((this.currentChunk-1) * this.chunk) + 1;
-    },
-    count: function() {
-      return this.countText.replace('{count}', this.records);
+   },
+   count: function() {
+    return this.countText.replace('{count}', this.records);
+  }
+},
+methods: {
+  setPage: function(page) {
+    if (this.allowedPage(page)) {
+      this.page = page;
+      bus.$emit('vue-pagination::' + this.for, page);
     }
   },
-  methods: {
-    setPage: function(page) {
-        if (this.allowedPage(page)) {
-        this.page = page;
-        bus.$emit('vue-pagination::' + this.for, page);
-        }
-    },
-    setChunk: function(direction) {
-      if (this.allowedChunk(direction))
-        this.setPage((((this.currentChunk -1) + direction) * this.chunk) + 1);
-    },
-    allowedPage: function(page) {
-      return (page>=1) && (page<=this.totalPages);
-    },
-    allowedPageClass: function(direction) {
-      return this.allowedPage(direction)?'':'disabled';
-    },
-    allowedChunk: function(direction) {
-      return (direction==1 && this.currentChunk<this.totalChunks)
-      ||  (direction==-1 && this.currentChunk>1);
-    },
-      allowedChunkClass: function(direction) {
-      return this.allowedChunk(direction)?'':'disabled';
-    },
-    activeClass: function(index) {
-      var page = this.paginationStart + index;
-      return this.page==page?'active':'';
-    }
+  next: function() {
+    return this.setPage(this.page + 1);
+  },
+  prev: function() {
+    return this.setPage(this.page -1);
+  },
+  nextChunk: function() {
+    return this.setChunk(1);
+  },
+  prevChunk: function() {
+    return this.setChunk(-1);
+  },
+  setChunk: function(direction) {
+    this.setPage((((this.currentChunk -1) + direction) * this.chunk) + 1);
+  },
+  allowedPage: function(page) {
+    return page>=1 && page<=this.totalPages;
+  },
+  allowedChunk: function(direction) {
+    return (direction==1 && this.currentChunk<this.totalChunks)
+    ||  (direction==-1 && this.currentChunk>1);
+  },
+  allowedPageClass: function(direction) {
+    return this.allowedPage(direction)?'':'disabled';
+  },
+  allowedChunkClass: function(direction) {
+    return this.allowedChunk(direction)?'':'disabled';
+  },
+  activeClass: function(index) {
+    var page = this.paginationStart + index;
+    return this.page==page?'active':'';
   }
+}
 }
 
 function range(start, count) {
@@ -90,5 +101,3 @@ function range(start, count) {
    return index + start;
  });
 }
-
-

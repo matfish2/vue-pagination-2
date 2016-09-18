@@ -53,8 +53,18 @@ Listen to it on your bus and respond accordingly:
 
 # Programmatic Manipulation
 
-To programmatically set the page apply a `ref` identifier to the component and call `setPage` on it:
+To programmatically set the page apply a `ref` identifier to the component and use one of the following methods:
 
-    <pagination ref="pagination" for="some-entity" :records="500"></pagination>
+* `setPage(page)`
+* `next()`
+* `prev()`
+* `nextChunk()`
+* `prevChunk()`
 
-    this.$refs.pagination.setPage(1)
+All methods return `true` if the page is legal and was thus set, or `false` otherwise.
+
+# Computed Properties
+
+* `totalPages`
+* `totalChunks`
+* `currentChunk`

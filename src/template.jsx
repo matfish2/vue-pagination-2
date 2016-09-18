@@ -28,7 +28,7 @@ module.exports = function() {
   <li class="VuePagination__pagination-item VuePagination__pagination-item-prev-page"
   class={this.allowedPageClass(this.page-1)}>
   <a href="javascript:void(0);"
-  on-click={this.setPage.bind(this, this.page-1)}>&lt;</a>
+  on-click={this.prev.bind(this)}>&lt;</a>
   </li>
 
   {items}
@@ -36,7 +36,7 @@ module.exports = function() {
   <li class="VuePagination__pagination-item VuePagination__pagination-item-next-page"
   class={this.allowedPageClass(this.page+1)}>
   <a href="javascript:void(0);"
-  on-click={this.setPage.bind(this,this.page+1)}>&gt;</a>
+  on-click={this.next.bind(this)}>&gt;</a>
   </li>
 
   <li class="VuePagination__pagination-item VuePagination__pagination-item-next-chunk"
