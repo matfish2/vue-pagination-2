@@ -1,12 +1,12 @@
 {
   "name": "vue-pagination-2",
   "description": "Vue.js 2 pagination component",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "keywords": [
     "pagination",
     "vuejs2",
     "bootstrap"
-    ],
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/matfish2/vue-pagination-2"
@@ -15,6 +15,7 @@
     "src"
   ],
   "dependencies": {
+    "merge": "^1.2.0",
     "vue": ">=2.0.0-rc.1"
   },
   "browserify": {
@@ -24,9 +25,6 @@
   },
   "licenses": "MIT",
   "main": "index.js",
-  "scripts": {
-
-  },
-  "devDependencies": {
-  }
+  "scripts": {},
+  "devDependencies": {}
 }
