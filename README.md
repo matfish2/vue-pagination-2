@@ -10,8 +10,8 @@ Presentation is based on bootstrap.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Handle page selection](#handle-page-selection)
-    - [Event Bus](#event-bus)
-    - [Vuex](#vuex)
+  - [Event Bus](#event-bus)
+  - [Vuex](#vuex)
 
 # Dependencies
 
@@ -66,7 +66,7 @@ Listen to it on your bus and respond accordingly:
 
 ## Vuex
 
-A. In your store add a pagination object to your `state`, where each key corresponds to a component's `for` prop, and the values represents the current page.
+A. In your store add a pagination object to your `state`, where each key corresponds to a component's `for` prop, and the values represent the current page.
 
       state: {
         ...
@@ -79,11 +79,11 @@ A. In your store add a pagination object to your `state`, where each key corresp
 
 B. Add the following mutation to your `mutations` object
 
-  mutations: {
-     PAGINATE (state, key, page) {
-      state.pagination[key] = page
-    }
-  }
+      mutations: {
+         PAGINATE (state, key, page) {
+          state.pagination[key] = page
+        }
+      }
 
 # Programmatic Manipulation
 
