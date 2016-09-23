@@ -9,6 +9,9 @@ Presentation is based on bootstrap.
 - [Dependencies](#dependencies)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Handle page selection](#handle-page-selection)
+    - [Event Bus](#event-bus)
+    - [Vuex](#vuex)
 
 # Dependencies
 
@@ -21,16 +24,22 @@ Compile the code using a module bundler, such as webpack or browserify, and the 
 
     npm install vue-pagination-2
 
-import the script and the event bus:
+import the script:
 
     import VuePagination from 'vue-pagination-2';
+
+If you are not using Vuex, import the event bus:
+
     import bus from 'vue-pagination-2/src/bus'
 
 # Usage
 
 ## Register the component(s)
 
-    Vue.use(VuePagination)
+    Vue.use(VuePagination, [useVuex])
+
+The second parameter is a boolean, which tells the plugin how to manange state.
+If you are using the `bus` option you can simply omit it.
 
 HTML:
 
@@ -44,12 +53,37 @@ props:
 * `chunk` `number` `optional` max pages per chunk. Default: 10
 * `count-text` `string` `optional` total records text. Default: '{count} records'
 
+# Handle page selection
+
+## Event bus
+
 When a page is selected an event will be dispatched, using the unique id for the component.
 Listen to it on your bus and respond accordingly:
 
       bus.$on('vue-pagination::some-entity', function(page) {
           // display the relevant records using the page param
       });
+
+## Vuex
+
+A. In your store add a pagination object to your `state`, where each key corresponds to a component's `for` prop, and the values represents the current page.
+
+      state: {
+        ...
+         pagination: {
+            tableA:1,
+            tableB:1
+        }
+        ...
+      }
+
+B. Add the following mutation to your `mutations` object
+
+  mutations: {
+     PAGINATE (state, key, page) {
+      state.pagination[key] = page
+    }
+  }
 
 # Programmatic Manipulation
 

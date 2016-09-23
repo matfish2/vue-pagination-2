@@ -1,14 +1,8 @@
-let bus = require('./bus')
 let template = require('./template.jsx');
 
 module.exports =
 {
   render:template(),
-  data: function() {
-    return {
-      page: 1
-    }
-  },
   props: {
     for: {
       type: String,
@@ -56,8 +50,7 @@ module.exports =
 methods: {
   setPage: function(page) {
     if (this.allowedPage(page)) {
-      this.page = page;
-      bus.$emit('vue-pagination::' + this.for, page);
+     this.paginate(page);
     }
   },
   next: function() {
