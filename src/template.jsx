@@ -3,13 +3,12 @@ module.exports = function() {
 
   var items = [];
 
-  this.pages.map(function(page, index) {
-    if (this.paginationStart + (page-1) <= this.totalPages)
+  this.pages.map(function(page) {
       items.push(
         <li class="VuePagination__pagination-item"
-        class={this.activeClass(index)}>
+        class={this.activeClass(page)}>
         <a href="javascript:void(0);"
-        on-click={this.setPage.bind(this, this.paginationStart + index)}>{this.paginationStart + index}</a>
+        on-click={this.setPage.bind(this, page)}>{page}</a>
         </li>
         )
   }.bind(this));

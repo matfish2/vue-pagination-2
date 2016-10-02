@@ -26,24 +26,35 @@ module.exports =
     }
   },
   computed: {
+    Chunk: function() {
+      return parseInt(this.chunk);
+    },
     pages: function() {
-      return range(1,parseInt(this.chunk));
+      if (!this.records)
+        return [];
+
+      return range(this.paginationStart, this.pagesInCurrentChunk);
     },
     totalPages: function() {
-      var total = Math.ceil(this.records / this.perPage);
-
-      return total?total:1;
+      return this.records?Math.ceil(this.records / this.perPage):1;
     },
     totalChunks: function() {
-      return Math.ceil(this.totalPages / this.chunk);
+      return Math.ceil(this.totalPages / this.Chunk);
     },
     currentChunk: function() {
-      return Math.ceil(this.page / this.chunk);
+      return Math.ceil(this.page / this.Chunk);
     },
     paginationStart: function() {
-     return ((this.currentChunk-1) * this.chunk) + 1;
+     return ((this.currentChunk-1) * this.Chunk) + 1;
    },
-   count: function() {
+   pagesInCurrentChunk: function() {
+
+    return this.paginationStart + this.Chunk < this.totalPages?
+    this.Chunk:
+    this.totalPages - this.paginationStart + 1;
+
+  },
+  count: function() {
     return this.countText.replace('{count}', this.records);
   }
 },
@@ -51,40 +62,39 @@ methods: {
   setPage: function(page) {
     if (this.allowedPage(page)) {
      this.paginate(page);
-    }
-  },
-  next: function() {
-    return this.setPage(this.page + 1);
-  },
-  prev: function() {
-    return this.setPage(this.page -1);
-  },
-  nextChunk: function() {
-    return this.setChunk(1);
-  },
-  prevChunk: function() {
-    return this.setChunk(-1);
-  },
-  setChunk: function(direction) {
-    this.setPage((((this.currentChunk -1) + direction) * this.chunk) + 1);
-  },
-  allowedPage: function(page) {
-    return page>=1 && page<=this.totalPages;
-  },
-  allowedChunk: function(direction) {
-    return (direction==1 && this.currentChunk<this.totalChunks)
-    ||  (direction==-1 && this.currentChunk>1);
-  },
-  allowedPageClass: function(direction) {
-    return this.allowedPage(direction)?'':'disabled';
-  },
-  allowedChunkClass: function(direction) {
-    return this.allowedChunk(direction)?'':'disabled';
-  },
-  activeClass: function(index) {
-    var page = this.paginationStart + index;
-    return this.page==page?'active':'';
-  }
+   }
+ },
+ next: function() {
+  return this.setPage(this.page + 1);
+},
+prev: function() {
+  return this.setPage(this.page -1);
+},
+nextChunk: function() {
+  return this.setChunk(1);
+},
+prevChunk: function() {
+  return this.setChunk(-1);
+},
+setChunk: function(direction) {
+  this.setPage((((this.currentChunk -1) + direction) * this.Chunk) + 1);
+},
+allowedPage: function(page) {
+  return page>=1 && page<=this.totalPages;
+},
+allowedChunk: function(direction) {
+  return (direction==1 && this.currentChunk<this.totalChunks)
+  ||  (direction==-1 && this.currentChunk>1);
+},
+allowedPageClass: function(direction) {
+  return this.allowedPage(direction)?'':'disabled';
+},
+allowedChunkClass: function(direction) {
+  return this.allowedChunk(direction)?'':'disabled';
+},
+activeClass: function(page) {
+  return this.page==page?'active':'';
+}
 }
 }
 
