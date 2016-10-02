@@ -49,7 +49,7 @@ module.exports =
    },
    pagesInCurrentChunk: function() {
 
-    return this.paginationStart + this.Chunk < this.totalPages?
+    return this.paginationStart + this.Chunk <= this.totalPages?
     this.Chunk:
     this.totalPages - this.paginationStart + 1;
 
