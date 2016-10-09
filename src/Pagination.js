@@ -1,4 +1,4 @@
-let template = require('./template.jsx');
+let template = require('./template.js');
 
 module.exports =
 {
