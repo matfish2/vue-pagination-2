@@ -1,22 +1,30 @@
 module.exports = function() {
   return  {
-    vuex: {
-    actions: {
-      paginate: function(store, page) {
-        store.dispatch('PAGINATE', this.for, page);
+    created: function() {
+      let name = this.for;
+
+      this.$store.registerModule(this.for,  {
+        state: {
+          page: 1
+        },
+        mutations: {
+         [`${name}.paginate`] (state, page) {
+          state.page = page
+        }
+      }
+    })
+    },
+    methods:{
+      paginate: function(page) {
+           this.$store.commit(this.for + '.paginate',  page);
       }
     },
-    getters: {
-      pagination:  function (state) {
-          return state.pagination;
+    computed:{
+      page: function() {
+        return this.$store.state[this.for].page
       }
     }
-  },
-  computed: {
-       page: function() {
-      return this.pagination[this.for]
-      },
   }
- };
-
 }
+
+

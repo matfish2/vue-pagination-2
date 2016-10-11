@@ -64,26 +64,11 @@ Listen to it on your bus and respond accordingly:
           // display the relevant records using the page param
       });
 
-## Vuex
+## Vuex (>=2.0.0)
 
-A. In your store add a pagination object to your `state`, where each key corresponds to a component's `for` prop, and the values represent the current page.
-
-      state: {
-        ...
-         pagination: {
-            tableA:1,
-            tableB:1
-        }
-        ...
-      }
-
-B. Add the following mutation to your `mutations` object
-
-      mutations: {
-         PAGINATE (state, key, page) {
-          state.pagination[key] = page
-        }
-      }
+The component will register a module on your store using the `for` attribute as the name.
+The module will have a `page` property that will contain the current page.
+vue-devtools will give you a nice overview of the data structure.
 
 # Programmatic Manipulation
 
