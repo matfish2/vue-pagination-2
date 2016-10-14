@@ -3,6 +3,8 @@ module.exports = function() {
     created: function() {
       let name = this.for;
 
+      if (this.$store.state[name]) return;
+
       this.$store.registerModule(this.for,  {
         state: {
           page: 1
