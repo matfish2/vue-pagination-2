@@ -10,7 +10,7 @@ module.exports = function() {
           page: 1
         },
         mutations: {
-         [`${name}.paginate`] (state, page) {
+         [`${name}/PAGINATE`] (state, page) {
           state.page = page
         }
       }
@@ -18,7 +18,7 @@ module.exports = function() {
     },
     methods:{
       paginate: function(page) {
-           this.$store.commit(this.for + '.paginate',  page);
+           this.$store.commit(`${this.for}/PAGINATE`,  page);
       }
     },
     computed:{
