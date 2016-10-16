@@ -49,9 +49,9 @@ props:
 
 * `for` `string` `required` unique identifier for the component instance.
 * `records` `number` `required` number of records
-* `per-page` `number` `optional` records per page. Default: 25
-* `chunk` `number` `optional` max pages per chunk. Default: 10
-* `count-text` `string` `optional` total records text. Default: '{count} records'
+* `per-page` `number` `optional` records per page. Default: `25`
+* `chunk` `number` `optional` max pages per chunk. Default: `10`
+* `count-text` `string` `optional` total records text. Default: `Showing {from} to {to} of {count} records`
 
 # Handle page selection
 
