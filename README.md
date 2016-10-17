@@ -66,9 +66,27 @@ Listen to it on your bus and respond accordingly:
 
 ## Vuex (>=2.0.0)
 
-The component will register a module on your store using the `for` attribute as the name.
+The component will register a module on your store using the `for` prop as the name.
 The module will have a `page` property that will contain the current page.
 vue-devtools will give you a nice overview of the data structure.
+
+If you want to latch on to an existing module on your store, use its name in the `for` prop and manuaully add the following to you store:
+
+    {
+      myModule:{
+        state:{
+        ```
+          page: 1
+        ```
+      },
+      mutations: {
+           ```
+           ['myModule/PAGINATE'](state, page) {
+                  state.page = page
+              }
+          ```
+        }
+      }
 
 # Programmatic Manipulation
 
