@@ -25,7 +25,7 @@ module.exports =
     countText: {
       type: String,
       required: false,
-      default: 'Showing {from} to {to} of {count} records'
+      default: 'Showing {from} to {to} of {count} records|{count} records|One record'
     }
   },
   computed: {
@@ -58,10 +58,12 @@ module.exports =
 
     let from = ((this.page-1) * this.perPage) + 1;
     let to = this.page==(this.totalPages)?this.records:from + this.perPage - 1;
+    let parts = this.countText.split('|');
+    let i = Math.min(this.records==1?2:this.totalPages==1?1:0, parts.length-1);
 
-    return this.countText.replace('{count}', this.records)
-                         .replace('{from}', from)
-                         .replace('{to}', to)
+    return parts[i].replace('{count}', this.records)
+                   .replace('{from}', from)
+                   .replace('{to}', to)
   }
 },
 methods: {

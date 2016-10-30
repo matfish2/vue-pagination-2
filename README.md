@@ -51,7 +51,12 @@ props:
 * `records` `number` `required` number of records
 * `per-page` `number` `optional` records per page. Default: `25`
 * `chunk` `number` `optional` max pages per chunk. Default: `10`
-* `count-text` `string` `optional` total records text. Default: `Showing {from} to {to} of {count} records`
+* `count-text` `string` `optional` total records text. It can consist of up to 3 parts, divided by `|`.
+  * First part: used when there are multiple pages
+  * Second part: used when there is only one page
+  * Third part: used when there is only one record.
+
+  Default: `Showing {from} to {to} of {count} records|{count} records|One record`
 
 # Handle page selection
 
