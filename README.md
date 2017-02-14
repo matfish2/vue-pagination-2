@@ -20,17 +20,11 @@ Presentation is based on bootstrap.
 
 # Installation
 
-Compile the code using a module bundler, such as webpack or browserify, and the [vue jsx transform](https://github.com/vuejs/babel-plugin-transform-vue-jsx)
-
     npm install vue-pagination-2
 
 import the script:
 
-    import VuePagination from 'vue-pagination-2';
-
-If you are not using Vuex, import the event bus:
-
-    import bus from 'vue-pagination-2/src/bus'
+    import {VuePagination, VueEvent} from 'vue-pagination-2';
 
 # Usage
 
@@ -65,7 +59,7 @@ props:
 When a page is selected an event will be dispatched, using the unique id for the component.
 Listen to it on your bus and respond accordingly:
 
-      bus.$on('vue-pagination::some-entity', function(page) {
+      VueEvent.$on('vue-pagination::some-entity', function(page) {
           // display the relevant records using the page param
       });
 

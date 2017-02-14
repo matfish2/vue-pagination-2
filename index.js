@@ -1,18 +1,6 @@
-var Pagination = require('./src/Pagination.js');
-var merge = require('merge');
-var busState = require('./src/state/bus');
-var vuexState = require('./src/state/vuex');
+var VuePagination = require('./compiled/main');
+var VueEvent = require('./compiled/bus');
 
-exports.install = function(Vue, useVuex) {
-
- var state = useVuex?
-             vuexState():
-             busState();
-
- Vue.component('pagination', merge.recursive(Pagination, state));
-
+module.exports = {
+  VuePagination, VueEvent
 }
-
-
-
-
