@@ -1,7 +1,7 @@
 {
   "name": "vue-pagination-2",
   "description": "Vue.js 2 pagination component",
-  "version": "0.2.7",
+  "version": "0.2.71",
   "keywords": [
     "pagination",
     "vuejs2",
@@ -12,7 +12,6 @@
     "url": "https://github.com/matfish2/vue-pagination-2"
   },
   "files": [
-    "src",
     "compiled"
   ],
   "dependencies": {
@@ -23,7 +22,11 @@
   "licenses": "MIT",
   "main": "index.js",
   "scripts": {
-    "compile":"babel src -d compiled"
+    "compile": "babel src -d compiled"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-helper-vue-jsx-merge-props": "^2.0.2",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.3.0"
+  }
 }

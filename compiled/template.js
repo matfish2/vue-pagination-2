@@ -14,7 +14,7 @@ module.exports = function () {
           { "class": "page-link", attrs: { href: "javascript:void(0);"
             },
             on: {
-              click: this.setPage.bind(this, page)
+              "click": this.setPage.bind(this, page)
             }
           },
           [page]
@@ -42,7 +42,7 @@ module.exports = function () {
             { "class": "page-link", attrs: { href: "javascript:void(0);"
               },
               on: {
-                click: this.setChunk.bind(this, -1)
+                "click": this.setChunk.bind(this, -1)
               }
             },
             ["<<"]
@@ -55,7 +55,7 @@ module.exports = function () {
             { "class": "page-link", attrs: { href: "javascript:void(0);"
               },
               on: {
-                click: this.prev.bind(this)
+                "click": this.prev.bind(this)
               }
             },
             ["<"]
@@ -68,7 +68,7 @@ module.exports = function () {
             { "class": "page-link", attrs: { href: "javascript:void(0);"
               },
               on: {
-                click: this.next.bind(this)
+                "click": this.next.bind(this)
               }
             },
             [">"]
@@ -81,7 +81,7 @@ module.exports = function () {
             { "class": "page-link", attrs: { href: "javascript:void(0);"
               },
               on: {
-                click: this.setChunk.bind(this, 1)
+                "click": this.setChunk.bind(this, 1)
               }
             },
             [">>"]

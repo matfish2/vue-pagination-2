@@ -7,7 +7,7 @@ var vuexState = require('../compiled/state/vuex');
 
 exports.install = function (Vue, useVuex) {
 
-            var state = useVuex ? vuexState() : busState();
+  var state = useVuex ? vuexState() : busState();
 
-            Vue.component('pagination', merge.recursive(Pagination, state));
+  Vue.component('pagination', merge.recursive(Pagination, state));
 };
