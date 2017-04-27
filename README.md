@@ -28,7 +28,13 @@ import the script:
 
 # Usage
 
-## Register the component(s)
+## Register the component globally or locally:
+
+```js
+Vue.component('pagination', Pagination);
+```
+
+OR
 
 ```js
 ...
