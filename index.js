@@ -1,7 +1,7 @@
-var VuePagination = require('./compiled/main');
-var VueEvent = require('./compiled/bus');
+var Pagination = require('./compiled/main');
+var PaginationEvent = require('./compiled/bus');
 
 module.exports = {
-  VuePagination:VuePagination,
-  VueEvent:VueEvent
+  Pagination:Pagination,
+  PaginationeEvent:PaginationEvent
 }

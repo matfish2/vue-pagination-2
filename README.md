@@ -24,16 +24,19 @@ Presentation is based on bootstrap.
 
 import the script:
 
-    import {VuePagination, VueEvent} from 'vue-pagination-2';
+    import {Pagination, PaginationEvent} from 'vue-pagination-2';
 
 # Usage
 
 ## Register the component(s)
 
-    Vue.use(VuePagination, [useVuex])
-
-The second parameter is a boolean, which tells the plugin how to manange state.
-If you are using the `bus` option you can simply omit it.
+```js
+...
+components: {
+  Pagination
+}
+...
+```
 
 HTML:
 
@@ -45,6 +48,7 @@ props:
 * `records` `number` `required` number of records
 * `per-page` `number` `optional` records per page. Default: `25`
 * `chunk` `number` `optional` max pages per chunk. Default: `10`
+* `vuex` `boolean` `optional` Use vuex to manage state
 * `count-text` `string` `optional` total records text. It can consist of up to 3 parts, divided by `|`.
   * First part: used when there are multiple pages
   * Second part: used when there is only one page
@@ -59,7 +63,7 @@ props:
 When a page is selected an event will be dispatched, using the unique id for the component.
 Listen to it on your bus and respond accordingly:
 
-      VueEvent.$on('vue-pagination::some-entity', function(page) {
+      PaginationEvent.$on('vue-pagination::some-entity', function(page) {
           // display the relevant records using the page param
       });
 

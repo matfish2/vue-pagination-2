@@ -1,6 +1,9 @@
 'use strict';
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var template = require('./template.js');
+var bus = require('./bus');
 
 module.exports = {
   render: template(),
@@ -27,9 +30,38 @@ module.exports = {
       type: String,
       required: false,
       default: 'Showing {from} to {to} of {count} records|{count} records|One record'
+    },
+    vuex: {
+      type: Boolean
     }
   },
+  created: function created() {
+
+    if (!this.vuex) return;
+
+    var name = this.for;
+
+    if (this.$store.state[name]) return;
+
+    this.$store.registerModule(this.for, {
+      state: {
+        page: 1
+      },
+      mutations: _defineProperty({}, name + '/PAGINATE', function undefined(state, page) {
+        state.page = page;
+      })
+    });
+  },
+  data: function data() {
+    return {
+      Page: 1
+    };
+  },
   computed: {
+    page: function page() {
+      return this.vuex ? this.$store.state[this.for].page : this.Page;
+    },
+
     pages: function pages() {
       if (!this.records) return [];
 
@@ -67,6 +99,15 @@ module.exports = {
         this.paginate(page);
       }
     },
+    paginate: function paginate(page) {
+      if (this.vuex) {
+        this.$store.commit(this.for + '/PAGINATE', page);
+      } else {
+        this.Page = page;
+        bus.$emit('vue-pagination::' + this.for, page);
+      }
+    },
+
     next: function next() {
       return this.setPage(this.page + 1);
     },

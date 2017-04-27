@@ -1,4 +1,5 @@
 let template = require('./template.js');
+let bus = require('./bus');
 
 module.exports =
 {
@@ -26,9 +27,39 @@ module.exports =
       type: String,
       required: false,
       default: 'Showing {from} to {to} of {count} records|{count} records|One record'
+    },
+    vuex: {
+      type: Boolean
+    }
+  },
+  created: function() {
+
+    if (!this.vuex) return;
+
+    let name = this.for;
+
+    if (this.$store.state[name]) return;
+
+    this.$store.registerModule(this.for,  {
+      state: {
+        page: 1
+      },
+      mutations: {
+       [`${name}/PAGINATE`] (state, page) {
+        state.page = page
+      }
+    }
+  })
+  },
+  data: function() {
+    return  {
+      Page:1
     }
   },
   computed: {
+    page() {
+      return this.vuex?this.$store.state[this.for].page:this.Page;
+    },
     pages: function() {
       if (!this.records)
         return [];
@@ -62,8 +93,8 @@ module.exports =
     let i = Math.min(this.records==1?2:this.totalPages==1?1:0, parts.length-1);
 
     return parts[i].replace('{count}', this.records)
-                   .replace('{from}', from)
-                   .replace('{to}', to)
+    .replace('{from}', from)
+    .replace('{to}', to)
   }
 },
 methods: {
@@ -72,7 +103,15 @@ methods: {
      this.paginate(page);
    }
  },
- next: function() {
+ paginate(page) {
+  if (this.vuex) {
+    this.$store.commit(`${this.for}/PAGINATE`,  page);
+  } else {
+    this.Page = page;
+    bus.$emit('vue-pagination::' + this.for, page);
+  }
+},
+next: function() {
   return this.setPage(this.page + 1);
 },
 prev: function() {

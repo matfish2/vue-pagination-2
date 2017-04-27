@@ -1,13 +1,9 @@
 'use strict';
 
-var Pagination = require('../compiled/Pagination');
-var merge = require('merge');
-var busState = require('../compiled/state/bus');
-var vuexState = require('../compiled/state/vuex');
+var Pagination = require('./Pagination');
+var PaginationEvent = require('./bus');
 
-exports.install = function (Vue, useVuex) {
-
-  var state = useVuex ? vuexState() : busState();
-
-  Vue.component('pagination', merge.recursive(Pagination, state));
+module.exports = {
+    Pagination: Pagination,
+    PaginationEvent: PaginationEvent
 };
