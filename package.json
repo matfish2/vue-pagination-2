@@ -1,7 +1,7 @@
 {
   "name": "vue-pagination-2",
   "description": "Vue.js 2 pagination component",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "keywords": [
     "pagination",
     "vuejs2",
@@ -16,7 +16,6 @@
     "index.js"
   ],
   "dependencies": {
-    "merge": "^1.2.0",
     "vue": ">=2.0.0",
     "vuex": "^2.0.0"
   },

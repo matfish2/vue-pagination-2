@@ -6,7 +6,7 @@ module.exports = function() {
   this.pages.map(function(page) {
       items.push(
         <li class={"VuePagination__pagination-item page-item "+this.activeClass(page)}>
-        <a class="page-link" href="javascript:void(0);"
+        <a class="page-link" role="button"
         on-click={this.setPage.bind(this, page)}>{page}</a>
         </li>
         )
