@@ -142,6 +142,10 @@ allowedChunkClass: function(direction) {
 activeClass: function(page) {
   return this.page==page?'active':'';
 }
+},
+beforeDestroy() {
+  bus.$off();
+  bus.$destroy();
 }
 }
 

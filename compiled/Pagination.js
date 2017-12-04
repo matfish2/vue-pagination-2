@@ -138,6 +138,10 @@ module.exports = {
     activeClass: function activeClass(page) {
       return this.page == page ? 'active' : '';
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    bus.$off();
+    bus.$destroy();
   }
 };
 
