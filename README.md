@@ -46,9 +46,9 @@ components: {
 ```
 
 HTML:
-
-    <pagination :records="500"></pagination>
-
+```vue
+<pagination :records="500"></pagination>
+```
 props:
 
 * `for` `string` `optional` unique identifier for the component instance.
@@ -70,7 +70,9 @@ props:
 When a page is selected an custom event `paginate` event will be dispatched.
 Listen to it and run your callback:
 
+```vue
 <pagination for="some-entity" :records="500" @paginate="myCallback"></pagination>
+```
 
 ## Event bus
 
