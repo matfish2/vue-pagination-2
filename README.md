@@ -47,7 +47,7 @@ components: {
 
 HTML:
 ```vue
-<pagination :records="500"></pagination>
+<pagination :records="500" @paginate="myCallback"></pagination>
 ```
 props:
 
@@ -68,11 +68,7 @@ props:
 ## Custom Event
 
 When a page is selected an custom event `paginate` event will be dispatched.
-Listen to it and run your callback:
-
-```vue
-<pagination for="some-entity" :records="500" @paginate="myCallback"></pagination>
-```
+Listen to it and run your callback
 
 ## Event bus
 
