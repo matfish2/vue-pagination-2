@@ -10,7 +10,7 @@ module.exports = {
   props: {
     for: {
       type: String,
-      required: true
+      required: false
     },
     records: {
       type: Number,
@@ -38,6 +38,10 @@ module.exports = {
   created: function created() {
 
     if (!this.vuex) return;
+
+    if (!this.for) {
+      throw new Error('vue-pagination-2: The "for" prop is required when using vuex');
+    }
 
     var name = this.for;
 
@@ -104,6 +108,11 @@ module.exports = {
         this.$store.commit(this.for + '/PAGINATE', page);
       } else {
         this.Page = page;
+      }
+
+      this.$emit('paginate', page);
+
+      if (this.for) {
         bus.$emit('vue-pagination::' + this.for, page);
       }
     },

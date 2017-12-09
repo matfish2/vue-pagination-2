@@ -10,6 +10,7 @@ Presentation is based on bootstrap.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Handle page selection](#handle-page-selection)
+  - [Custom Event](#custom-event)
   - [Event Bus](#event-bus)
   - [Vuex](#vuex)
 
@@ -24,7 +25,7 @@ Presentation is based on bootstrap.
 
 import the script:
 
-    import {Pagination, PaginationEvent} from 'vue-pagination-2';
+    import {Pagination} from 'vue-pagination-2';
 
 # Usage
 
@@ -46,11 +47,11 @@ components: {
 
 HTML:
 
-    <pagination for="some-entity" :records="500"></pagination>
+    <pagination :records="500"></pagination>
 
 props:
 
-* `for` `string` `required` unique identifier for the component instance.
+* `for` `string` `optional` unique identifier for the component instance.
 * `records` `number` `required` number of records
 * `per-page` `number` `optional` records per page. Default: `25`
 * `chunk` `number` `optional` max pages per chunk. Default: `10`
@@ -64,16 +65,36 @@ props:
 
 # Handle page selection
 
+## Custom Event
+
+When a page is selected an custom event `paginate` event will be dispatched.
+Listen to it and run your callback:
+
+<pagination for="some-entity" :records="500" @paginate="myCallback"></pagination>
+
 ## Event bus
 
-When a page is selected an event will be dispatched, using the unique id for the component.
+Note: To use this option you must: 
+
+A. Provide a unique identifier using the `for` prop
+B. Import the pagination event bus along with the component itself:
+
+```js
+import {Pagination,PaginationEvent} from 'vue-pagination-2'
+```
+
+When a page is selected the bus will dispatched an event, using the unique id for the component.
 Listen to it on your bus and respond accordingly:
 
-      PaginationEvent.$on('vue-pagination::some-entity', function(page) {
-          // display the relevant records using the page param
-      });
+```js
+PaginationEvent.$on('vue-pagination::some-entity', function(page) {
+    // display the relevant records using the page param
+});
+```
 
 ## Vuex (>=2.0.0)
+
+Note: To use this option you must provide a unique identifier using the `for` prop.
 
 The component will register a module on your store using the `for` prop as the name.
 The module will have a `page` property that will contain the current page.
