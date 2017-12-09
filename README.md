@@ -1,5 +1,7 @@
 # Vue Pagination 2
 
+[Click here](https://jsfiddle.net/matfish2/c9wp2k63) to see it in action.
+
 Note: This package is for use with Vuejs 2.
 For version 1 please use [v-pagination](https://www.npmjs.com/package/v-pagination) instead.
 
