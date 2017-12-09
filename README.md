@@ -8,6 +8,8 @@ Presentation is based on bootstrap.
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
+  -[NPM](#npm)
+  -[Script tag](#script-tag)
 - [Usage](#usage)
 - [Handle page selection](#handle-page-selection)
   - [Custom Event](#custom-event)
@@ -21,11 +23,18 @@ Presentation is based on bootstrap.
 
 # Installation
 
+## NPM
+
     npm install vue-pagination-2
 
 import the script:
 
     import {Pagination} from 'vue-pagination-2';
+
+## Script tag
+
+Grab the minified version under `dist/vue-pagination-2.min.js`. 
+It will export a global `Pagination` variable. 
 
 # Usage
 
