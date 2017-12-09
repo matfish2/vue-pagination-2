@@ -8,8 +8,8 @@ Presentation is based on bootstrap.
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
-  -[NPM](#npm)
-  -[Script tag](#script-tag)
+  - [NPM](#npm)
+  - [Script tag](#script-tag)
 - [Usage](#usage)
 - [Handle page selection](#handle-page-selection)
   - [Custom Event](#custom-event)
