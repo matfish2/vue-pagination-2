@@ -55,7 +55,8 @@ props:
 * `records` `number` `required` number of records
 * `per-page` `number` `optional` records per page. Default: `25`
 * `chunk` `number` `optional` max pages per chunk. Default: `10`
-* `vuex` `boolean` `optional` Use vuex to manage state
+* `vuex` `boolean` `optional` Use vuex to manage state. Default: `false`
+* `format` `boolean` `optional` Format numbers using a separating comma. Default: `true`
 * `count-text` `string` `optional` total records text. It can consist of up to 3 parts, divided by `|`.
   * First part: used when there are multiple pages
   * Second part: used when there is only one page

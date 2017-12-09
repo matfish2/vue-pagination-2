@@ -33,6 +33,10 @@ module.exports = {
     },
     vuex: {
       type: Boolean
+    },
+    format: {
+      type: Boolean,
+      default: true
     }
   },
   created: function created() {
@@ -94,7 +98,7 @@ module.exports = {
       var parts = this.countText.split('|');
       var i = Math.min(this.records == 1 ? 2 : this.totalPages == 1 ? 1 : 0, parts.length - 1);
 
-      return parts[i].replace('{count}', this.records).replace('{from}', from).replace('{to}', to);
+      return parts[i].replace('{count}', this.formatNumber(this.records)).replace('{from}', this.formatNumber(from)).replace('{to}', this.formatNumber(to));
     }
   },
   methods: {
@@ -146,6 +150,12 @@ module.exports = {
     },
     activeClass: function activeClass(page) {
       return this.page == page ? 'active' : '';
+    },
+    formatNumber: function formatNumber(num) {
+
+      if (!this.format) return num;
+
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
   beforeDestroy: function beforeDestroy() {
