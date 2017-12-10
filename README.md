@@ -79,8 +79,8 @@ props:
 
 ## Custom Event
 
-When a page is selected an custom event `paginate` event will be dispatched.
-Listen to it and run your callback
+When a page is selected a custom `paginate` event will be dispatched.
+Listen to it on the component and run your callback
 
 ## Event bus
 
