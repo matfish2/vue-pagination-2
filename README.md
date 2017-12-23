@@ -67,6 +67,8 @@ props:
 * `per-page` `number` `optional` records per page. Default: `25`
 * `chunk` `number` `optional` max pages per chunk. Default: `10`
 * `vuex` `boolean` `optional` Use vuex to manage state. Default: `false`
+* `theme` `string` CSS framework used for styling. Supported: `bootstrap3`, `bootstrap4`,`bulma`. Default: `bootstrap3`
+* `align` Alignment of the component. Options: `center`, `left`, `right`. Default: `center`
 * `format` `boolean` `optional` Format numbers using a separating comma. Default: `true`
 * `count-text` `string` `optional` total records text. It can consist of up to 3 parts, divided by `|`.
   * First part: used when there are multiple pages

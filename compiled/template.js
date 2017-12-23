@@ -1,17 +1,22 @@
 "use strict";
 
 module.exports = function () {
+
   return function (h) {
 
+    var theme = this.Theme;
+    var alignText = this.align + "Text";
     var items = [];
 
     this.pages.map(function (page) {
       items.push(h(
         "li",
-        { "class": "VuePagination__pagination-item page-item " + this.activeClass(page) },
+        { "class": "VuePagination__pagination-item " + theme.item + " " + this.activeClass(page) },
         [h(
           "a",
-          { "class": "page-link", attrs: { role: "button"
+          { "class": theme.link + " " + this.activeClass(page),
+            attrs: { href: "javascript:void(0)",
+              role: "button"
             },
             on: {
               "click": this.setPage.bind(this, page)
@@ -26,65 +31,77 @@ module.exports = function () {
       "div",
       { "class": "VuePagination" },
       [h(
-        "ul",
-        {
-          directives: [{
-            name: "show",
-            value: this.totalPages > 1
-          }],
-
-          "class": "pagination VuePagination__pagination" },
+        "nav",
+        { "class": theme.wrapper + " " + theme[this.align] },
         [h(
-          "li",
-          { "class": "VuePagination__pagination-item page-item VuePagination__pagination-item-prev-chunk " + this.allowedChunkClass(-1) },
+          "ul",
+          {
+            directives: [{
+              name: "show",
+              value: this.totalPages > 1
+            }],
+
+            "class": theme.list + " " + theme[this.align] + " VuePagination__pagination" },
           [h(
-            "a",
-            { "class": "page-link", attrs: { href: "javascript:void(0);"
+            "li",
+            { "class": "VuePagination__pagination-item " + theme.item + " " + theme.prev + " VuePagination__pagination-item-prev-chunk " + this.allowedChunkClass(-1) },
+            [h(
+              "a",
+              { "class": theme.link,
+                attrs: { href: "javascript:void(0);",
+                  disabled: !!this.allowedChunkClass(-1)
+                },
+                on: {
+                  "click": this.setChunk.bind(this, -1)
+                }
               },
-              on: {
-                "click": this.setChunk.bind(this, -1)
-              }
-            },
-            ["<<"]
-          )]
-        ), h(
-          "li",
-          { "class": "VuePagination__pagination-item page-item VuePagination__pagination-item-prev-page " + this.allowedPageClass(this.page - 1) },
-          [h(
-            "a",
-            { "class": "page-link", attrs: { href: "javascript:void(0);"
+              ["<<"]
+            )]
+          ), h(
+            "li",
+            { "class": "VuePagination__pagination-item " + theme.item + " " + theme.prev + " VuePagination__pagination-item-prev-page " + this.allowedPageClass(this.page - 1) },
+            [h(
+              "a",
+              { "class": theme.link,
+                attrs: { href: "javascript:void(0);",
+                  disabled: !!this.allowedPageClass(this.page - 1)
+                },
+                on: {
+                  "click": this.prev.bind(this)
+                }
               },
-              on: {
-                "click": this.prev.bind(this)
-              }
-            },
-            ["<"]
-          )]
-        ), items, h(
-          "li",
-          { "class": "VuePagination__pagination-item page-item VuePagination__pagination-item-next-page " + this.allowedPageClass(this.page + 1) },
-          [h(
-            "a",
-            { "class": "page-link", attrs: { href: "javascript:void(0);"
+              ["<"]
+            )]
+          ), items, h(
+            "li",
+            { "class": "VuePagination__pagination-item " + theme.item + " " + theme.next + " VuePagination__pagination-item-next-page " + this.allowedPageClass(this.page + 1) },
+            [h(
+              "a",
+              { "class": theme.link,
+                attrs: { href: "javascript:void(0);",
+                  disabled: !!this.allowedPageClass(this.page + 1)
+                },
+                on: {
+                  "click": this.next.bind(this)
+                }
               },
-              on: {
-                "click": this.next.bind(this)
-              }
-            },
-            [">"]
-          )]
-        ), h(
-          "li",
-          { "class": "VuePagination__pagination-item page-item VuePagination__pagination-item-next-chunk " + this.allowedChunkClass(1) },
-          [h(
-            "a",
-            { "class": "page-link", attrs: { href: "javascript:void(0);"
+              [">"]
+            )]
+          ), h(
+            "li",
+            { "class": "VuePagination__pagination-item " + theme.item + " " + theme.next + " VuePagination__pagination-item-next-chunk " + this.allowedChunkClass(1) },
+            [h(
+              "a",
+              { "class": theme.link,
+                attrs: { href: "javascript:void(0);",
+                  disabled: !!this.allowedChunkClass(1)
+                },
+                on: {
+                  "click": this.setChunk.bind(this, 1)
+                }
               },
-              on: {
-                "click": this.setChunk.bind(this, 1)
-              }
-            },
-            [">>"]
+              [">>"]
+            )]
           )]
         )]
       ), h(
@@ -95,7 +112,7 @@ module.exports = function () {
             value: parseInt(this.records)
           }],
 
-          "class": "VuePagination__count" },
+          "class": "VuePagination__count " + theme[alignText] },
         [this.count]
       )]
     );

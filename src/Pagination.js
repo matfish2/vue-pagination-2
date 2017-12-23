@@ -3,11 +3,19 @@ let bus = require('./bus');
 
 module.exports =
 {
-  render:template(),
+  render:template.call(this),
   props: {
     for: {
       type: String,
       required: false
+    },
+    theme: {
+      type: String,
+      default:'bootstrap3'
+    },
+    align:{
+      type: String,
+      default:'center'
     },
     records: {
       type: Number,
@@ -65,6 +73,16 @@ module.exports =
     }
   },
   computed: {
+      Theme() {
+        
+        var themes = {
+          bootstrap3:require('./themes/bootstrap3'),
+          bootstrap4:require('./themes/bootstrap4'),
+          bulma:require('./themes/bulma')    
+        }
+        
+        return themes[this.theme];
+      },      
     page() {
       return this.vuex?this.$store.state[this.for].page:this.Page;
     },
@@ -153,7 +171,7 @@ module.exports =
       return this.allowedChunk(direction)?'':'disabled';
     },
     activeClass: function(page) {
-      return this.page==page?'active':'';
+      return this.page==page?this.Theme.active:'';
     },
     formatNumber: function (num) {
     
