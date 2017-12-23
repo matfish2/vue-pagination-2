@@ -20,7 +20,7 @@ Simple, generic and non-intrusive pagination component for Vue.js version 2.
 # Dependencies
 
 * Vue.js (>=2.0.0-rc.1). Required.
-* Bootstrap (CSS). Optional.
+* CSS: Bootstrap 3 or Bootstrap 4 or Bulma.
 
 # Installation
 
