@@ -6,7 +6,6 @@ Note: This package is for use with Vuejs 2.
 For version 1 please use [v-pagination](https://www.npmjs.com/package/v-pagination) instead.
 
 Simple, generic and non-intrusive pagination component for Vue.js version 2.
-Presentation is based on bootstrap.
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
