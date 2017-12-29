@@ -10,7 +10,6 @@ module.exports =
       required: false
     },
     theme: {
-      type: String,
       default:'bootstrap3'
     },
     align:{
@@ -75,12 +74,20 @@ module.exports =
   computed: {
       Theme() {
         
+        if (typeof this.theme==='object') {
+          return this.theme;
+        } 
+
         var themes = {
           bootstrap3:require('./themes/bootstrap3'),
           bootstrap4:require('./themes/bootstrap4'),
           bulma:require('./themes/bulma')    
         }
         
+        if (typeof themes[this.theme]===undefined) {
+          throw `vue-pagination-2: the theme ${this.theme} does not exist`;
+        }
+
         return themes[this.theme];
       },      
     page() {

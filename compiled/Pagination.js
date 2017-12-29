@@ -1,5 +1,7 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var template = require('./template.js');
@@ -13,7 +15,6 @@ module.exports = {
       required: false
     },
     theme: {
-      type: String,
       default: 'bootstrap3'
     },
     align: {
@@ -76,11 +77,19 @@ module.exports = {
   computed: {
     Theme: function Theme() {
 
+      if (_typeof(this.theme) === 'object') {
+        return this.theme;
+      }
+
       var themes = {
         bootstrap3: require('./themes/bootstrap3'),
         bootstrap4: require('./themes/bootstrap4'),
         bulma: require('./themes/bulma')
       };
+
+      if (_typeof(themes[this.theme]) === undefined) {
+        throw 'vue-pagination-2: the theme ' + this.theme + ' does not exist';
+      }
 
       return themes[this.theme];
     },

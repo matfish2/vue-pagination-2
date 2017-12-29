@@ -29,10 +29,10 @@ module.exports = function () {
 
     return h(
       "div",
-      { "class": "VuePagination" },
+      { "class": "VuePagination " + theme.wrapper },
       [h(
         "nav",
-        { "class": theme.wrapper + " " + theme[this.align] },
+        { "class": "" + theme.nav },
         [h(
           "ul",
           {
@@ -41,7 +41,7 @@ module.exports = function () {
               value: this.totalPages > 1
             }],
 
-            "class": theme.list + " " + theme[this.align] + " VuePagination__pagination" },
+            "class": theme.list + " VuePagination__pagination" },
           [h(
             "li",
             { "class": "VuePagination__pagination-item " + theme.item + " " + theme.prev + " VuePagination__pagination-item-prev-chunk " + this.allowedChunkClass(-1) },
@@ -103,17 +103,17 @@ module.exports = function () {
               [">>"]
             )]
           )]
-        )]
-      ), h(
-        "p",
-        {
-          directives: [{
-            name: "show",
-            value: parseInt(this.records)
-          }],
+        ), h(
+          "p",
+          {
+            directives: [{
+              name: "show",
+              value: parseInt(this.records)
+            }],
 
-          "class": "VuePagination__count " + theme[alignText] },
-        [this.count]
+            "class": "VuePagination__count " + theme.count },
+          [this.count]
+        )]
       )]
     );
   };

@@ -17,9 +17,9 @@ module.exports = function() {
       )
     }.bind(this));
     
-    return <div class="VuePagination"><nav class={`${theme.wrapper} ${theme[this.align]}`}>
+    return <div class={`VuePagination ${theme.wrapper}`}><nav class={`${theme.nav}`}>
     <ul v-show={this.totalPages>1}
-    class={`${theme.list} ${theme[this.align]} VuePagination__pagination`}>
+    class={`${theme.list} VuePagination__pagination`}>
     
     <li class={`VuePagination__pagination-item ${theme.item} ${theme.prev} VuePagination__pagination-item-prev-chunk ${this.allowedChunkClass(-1)}`}>
     <a class={theme.link} 
@@ -52,9 +52,9 @@ module.exports = function() {
     on-click={this.setChunk.bind(this,1)}>&gt;&gt;</a>
     </li>
     </ul>
-    </nav>
     <p v-show={parseInt(this.records)}
-    class={`VuePagination__count ${theme[alignText]}`}>{this.count}</p>
+    class={`VuePagination__count ${theme.count}`}>{this.count}</p>
+    </nav>
     </div>
   }
 }
