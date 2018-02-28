@@ -120,9 +120,16 @@ module.exports = {
     },
     count: function count() {
 
+      if (/{page}/.test(this.countText)) {
+
+        if (this.totalPages <= 1) return '';
+
+        return this.countText.replace('{page}', this.page).replace('{pages}', this.totalPages);
+      }
+
+      var parts = this.countText.split('|');
       var from = (this.page - 1) * this.perPage + 1;
       var to = this.page == this.totalPages ? this.records : from + this.perPage - 1;
-      var parts = this.countText.split('|');
       var i = Math.min(this.records == 1 ? 2 : this.totalPages == 1 ? 1 : 0, parts.length - 1);
 
       return parts[i].replace('{count}', this.formatNumber(this.records)).replace('{from}', this.formatNumber(from)).replace('{to}', this.formatNumber(to));

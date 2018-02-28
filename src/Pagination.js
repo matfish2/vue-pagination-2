@@ -119,10 +119,19 @@ module.exports =
       
     },
     count: function() {
+
       
+      if (/{page}/.test(this.countText)) {
+        
+        if (this.totalPages<=1) return '';
+
+        return this.countText.replace('{page}', this.page).replace('{pages}', this.totalPages);
+        
+      }
+
+      let parts = this.countText.split('|');
       let from = ((this.page-1) * this.perPage) + 1;
       let to = this.page==(this.totalPages)?this.records:from + this.perPage - 1;
-      let parts = this.countText.split('|');
       let i = Math.min(this.records==1?2:this.totalPages==1?1:0, parts.length-1);
       
       return parts[i].replace('{count}', this.formatNumber(this.records))

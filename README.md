@@ -75,6 +75,10 @@ props:
 
   Default: `Showing {from} to {to} of {count} records|{count} records|One record`
 
+  Note: if you want to display the page number rather than the records range, use `{page}` and `{pages}` as a placeholders. 
+  E.g: `Showing page {page} out of {pages}`
+
+
 # Handle page selection
 
 ## Custom Event
