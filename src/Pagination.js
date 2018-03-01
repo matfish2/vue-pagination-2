@@ -30,7 +30,7 @@ module.exports =
     },
     chunksNavigation:{
       type:String,
-      default:'scroll',
+      default:'fixed',
       validator: (value) => {
         return ['scroll','fixed'].indexOf(value)>-1;
       }
