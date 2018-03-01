@@ -65,6 +65,9 @@ props:
 * `records` `number` `required` number of records
 * `per-page` `number` `optional` records per page. Default: `25`
 * `chunk` `number` `optional` max pages per chunk. Default: `10`
+* `chunks-navigation` `string` `optional` Which method to use when navigating outside chunks boundries. Default: `scroll`. Options are:  
+  * `scroll` - the range of pages presented will incrementally change when navigating to a page outside the chunk (e.g 1-10 will become 2-11 once the user presses the next arrow to move to page 11). 
+  * `fixed` - navigation will occur between fixed chunks (e.g 1-10, 11-20, 21-30 etc.). Double arrows will be added to allow navigation to the beginning of the previous or next chunk. 
 * `vuex` `boolean` `optional` Use vuex to manage state. Default: `false`
 * `theme` `string` CSS theme used for styling. Supported: `bootstrap3`, `bootstrap4`,`bulma`. Default: `bootstrap3`.
 * `format` `boolean` `optional` Format numbers using a separating comma. Default: `true`

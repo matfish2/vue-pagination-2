@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 module.exports = function () {
 
@@ -7,19 +7,58 @@ module.exports = function () {
     var theme = this.Theme;
     var alignText = this.align + "Text";
     var items = [];
+    var prevChunk = '';
+    var nextChunk = '';
+
+    if (this.chunksNavigation === 'arrows') {
+
+      prevChunk = h(
+        'li',
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.prev + ' VuePagination__pagination-item-prev-chunk ' + this.allowedChunkClass(-1) },
+        [h(
+          'a',
+          { 'class': theme.link,
+            attrs: { href: 'javascript:void(0);',
+              disabled: !!this.allowedChunkClass(-1)
+            },
+            on: {
+              'click': this.setChunk.bind(this, -1)
+            }
+          },
+          ['<<']
+        )]
+      );
+
+      nextChunk = h(
+        'li',
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.next + ' VuePagination__pagination-item-next-chunk ' + this.allowedChunkClass(1) },
+        [h(
+          'a',
+          { 'class': theme.link,
+            attrs: { href: 'javascript:void(0);',
+              disabled: !!this.allowedChunkClass(1)
+            },
+            on: {
+              'click': this.setChunk.bind(this, 1)
+            }
+          },
+          ['>>']
+        )]
+      );
+    }
 
     this.pages.map(function (page) {
       items.push(h(
-        "li",
-        { "class": "VuePagination__pagination-item " + theme.item + " " + this.activeClass(page) },
+        'li',
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + this.activeClass(page) },
         [h(
-          "a",
-          { "class": theme.link + " " + this.activeClass(page),
-            attrs: { href: "javascript:void(0)",
-              role: "button"
+          'a',
+          { 'class': theme.link + ' ' + this.activeClass(page),
+            attrs: { href: 'javascript:void(0)',
+              role: 'button'
             },
             on: {
-              "click": this.setPage.bind(this, page)
+              'click': this.setPage.bind(this, page)
             }
           },
           [page]
@@ -28,90 +67,60 @@ module.exports = function () {
     }.bind(this));
 
     return h(
-      "div",
-      { "class": "VuePagination " + theme.wrapper },
+      'div',
+      { 'class': 'VuePagination ' + theme.wrapper },
       [h(
-        "nav",
-        { "class": "" + theme.nav },
+        'nav',
+        { 'class': '' + theme.nav },
         [h(
-          "ul",
+          'ul',
           {
             directives: [{
-              name: "show",
+              name: 'show',
               value: this.totalPages > 1
             }],
 
-            "class": theme.list + " VuePagination__pagination" },
-          [h(
-            "li",
-            { "class": "VuePagination__pagination-item " + theme.item + " " + theme.prev + " VuePagination__pagination-item-prev-chunk " + this.allowedChunkClass(-1) },
+            'class': theme.list + ' VuePagination__pagination' },
+          [prevChunk, h(
+            'li',
+            { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.prev + ' VuePagination__pagination-item-prev-page ' + this.allowedPageClass(this.page - 1) },
             [h(
-              "a",
-              { "class": theme.link,
-                attrs: { href: "javascript:void(0);",
-                  disabled: !!this.allowedChunkClass(-1)
-                },
-                on: {
-                  "click": this.setChunk.bind(this, -1)
-                }
-              },
-              ["<<"]
-            )]
-          ), h(
-            "li",
-            { "class": "VuePagination__pagination-item " + theme.item + " " + theme.prev + " VuePagination__pagination-item-prev-page " + this.allowedPageClass(this.page - 1) },
-            [h(
-              "a",
-              { "class": theme.link,
-                attrs: { href: "javascript:void(0);",
+              'a',
+              { 'class': theme.link,
+                attrs: { href: 'javascript:void(0);',
                   disabled: !!this.allowedPageClass(this.page - 1)
                 },
                 on: {
-                  "click": this.prev.bind(this)
+                  'click': this.prev.bind(this)
                 }
               },
-              ["<"]
+              ['<']
             )]
           ), items, h(
-            "li",
-            { "class": "VuePagination__pagination-item " + theme.item + " " + theme.next + " VuePagination__pagination-item-next-page " + this.allowedPageClass(this.page + 1) },
+            'li',
+            { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.next + ' VuePagination__pagination-item-next-page ' + this.allowedPageClass(this.page + 1) },
             [h(
-              "a",
-              { "class": theme.link,
-                attrs: { href: "javascript:void(0);",
+              'a',
+              { 'class': theme.link,
+                attrs: { href: 'javascript:void(0);',
                   disabled: !!this.allowedPageClass(this.page + 1)
                 },
                 on: {
-                  "click": this.next.bind(this)
+                  'click': this.next.bind(this)
                 }
               },
-              [">"]
+              ['>']
             )]
-          ), h(
-            "li",
-            { "class": "VuePagination__pagination-item " + theme.item + " " + theme.next + " VuePagination__pagination-item-next-chunk " + this.allowedChunkClass(1) },
-            [h(
-              "a",
-              { "class": theme.link,
-                attrs: { href: "javascript:void(0);",
-                  disabled: !!this.allowedChunkClass(1)
-                },
-                on: {
-                  "click": this.setChunk.bind(this, 1)
-                }
-              },
-              [">>"]
-            )]
-          )]
+          ), nextChunk]
         ), h(
-          "p",
+          'p',
           {
             directives: [{
-              name: "show",
+              name: 'show',
               value: parseInt(this.records)
             }],
 
-            "class": "VuePagination__count " + theme.count },
+            'class': 'VuePagination__count ' + theme.count },
           [this.count]
         )]
       )]

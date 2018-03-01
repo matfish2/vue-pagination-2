@@ -27,17 +27,21 @@ module.exports = {
     },
     perPage: {
       type: Number,
-      required: false,
       default: 25
     },
     chunk: {
       type: Number,
-      required: false,
       default: 10
+    },
+    chunksNavigation: {
+      type: String,
+      default: 'scroll',
+      validator: function validator(value) {
+        return ['scroll', 'fixed'].indexOf(value) > -1;
+      }
     },
     countText: {
       type: String,
-      required: false,
       default: 'Showing {from} to {to} of {count} records|{count} records|One record'
     },
     vuex: {
@@ -71,7 +75,8 @@ module.exports = {
   },
   data: function data() {
     return {
-      Page: 1
+      Page: 1,
+      firstPage: 1
     };
   },
   computed: {
@@ -112,10 +117,14 @@ module.exports = {
       return Math.ceil(this.page / this.chunk);
     },
     paginationStart: function paginationStart() {
+
+      if (this.chunksNavigation === 'scroll') {
+        return this.firstPage;
+      }
+
       return (this.currentChunk - 1) * this.chunk + 1;
     },
     pagesInCurrentChunk: function pagesInCurrentChunk() {
-
       return this.paginationStart + this.chunk <= this.totalPages ? this.chunk : this.totalPages - this.paginationStart + 1;
     },
     count: function count() {
@@ -156,11 +165,29 @@ module.exports = {
     },
 
     next: function next() {
-      return this.setPage(this.page + 1);
+      var page = this.page + 1;
+      if (this.chunksNavigation === 'scroll' && this.allowedPage(page) && !this.inDisplay(page)) {
+        this.firstPage++;
+      }
+      return this.setPage(page);
     },
     prev: function prev() {
-      return this.setPage(this.page - 1);
+      var page = this.page - 1;
+
+      if (this.chunksNavigation === 'scroll' && this.allowedPage(page) && !this.inDisplay(page)) {
+        this.firstPage--;
+      }
+
+      return this.setPage(page);
     },
+    inDisplay: function inDisplay(page) {
+
+      var start = this.firstPage;
+      var end = start + this.chunk - 1;
+
+      return page >= start && page <= end;
+    },
+
     nextChunk: function nextChunk() {
       return this.setChunk(1);
     },

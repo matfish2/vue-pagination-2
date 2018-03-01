@@ -22,17 +22,21 @@ module.exports =
     },
     perPage: {
       type: Number,
-      required: false,
       default: 25
     },
     chunk: {
       type: Number,
-      required: false,
       default: 10
+    },
+    chunksNavigation:{
+      type:String,
+      default:'scroll',
+      validator: (value) => {
+        return ['scroll','fixed'].indexOf(value)>-1;
+      }
     },
     countText: {
       type: String,
-      required: false,
       default: 'Showing {from} to {to} of {count} records|{count} records|One record'
     },
     vuex: {
@@ -68,7 +72,8 @@ module.exports =
   },
   data: function() {
     return  {
-      Page:1
+      Page:1,
+      firstPage:1
     }
   },
   computed: {
@@ -109,10 +114,14 @@ module.exports =
       return Math.ceil(this.page / this.chunk);
     },
     paginationStart: function() {
+
+      if (this.chunksNavigation==='scroll') {
+        return this.firstPage;
+      }
+
       return ((this.currentChunk-1) * this.chunk) + 1;
     },
     pagesInCurrentChunk: function() {
-      
       return this.paginationStart + this.chunk <= this.totalPages?
       this.chunk:
       this.totalPages - this.paginationStart + 1;
@@ -159,10 +168,27 @@ module.exports =
       }
     },
     next: function() {
-      return this.setPage(this.page + 1);
+      var page = this.page + 1;
+      if (this.chunksNavigation==='scroll' && this.allowedPage(page) && !this.inDisplay(page)) {
+        this.firstPage++; 
+      }
+      return this.setPage(page);
     },
     prev: function() {
-      return this.setPage(this.page -1);
+      var page = this.page - 1;
+      
+      if (this.chunksNavigation==='scroll' && this.allowedPage(page) &&  !this.inDisplay(page)) {
+        this.firstPage--; 
+      }
+      
+      return this.setPage(page);
+    },
+    inDisplay(page) {
+      
+      var start = this.firstPage;
+      var end = start + this.chunk - 1;
+
+      return page>=start && page<=end;
     },
     nextChunk: function() {
       return this.setChunk(1);
