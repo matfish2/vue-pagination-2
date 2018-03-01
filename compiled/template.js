@@ -10,7 +10,7 @@ module.exports = function () {
     var prevChunk = '';
     var nextChunk = '';
 
-    if (this.chunksNavigation === 'arrows') {
+    if (this.chunksNavigation === 'fixed') {
 
       prevChunk = h(
         'li',

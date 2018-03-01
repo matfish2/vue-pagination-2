@@ -8,7 +8,7 @@ module.exports = function() {
     var prevChunk = '';
     var nextChunk = '';
 
-    if (this.chunksNavigation==='arrows') {
+    if (this.chunksNavigation==='fixed') {
      
      prevChunk =  <li class={`VuePagination__pagination-item ${theme.item} ${theme.prev} VuePagination__pagination-item-prev-chunk ${this.allowedChunkClass(-1)}`}>
       <a class={theme.link} 
