@@ -4,17 +4,13 @@ module.exports = function() {
     
     var theme = this.Theme;
     var alignText = this.align + "Text";
-    var items = [];
-    
-    this.pages.map(function(page) {
-      items.push(
-        <li class={`VuePagination__pagination-item ${theme.item} ${this.activeClass(page)}`}>
-        <a class={`${theme.link} ${this.activeClass(page)}`} 
-        href="javascript:void(0)"
-        role="button"
-        on-click={this.setPage.bind(this, page)}>{page}</a>
-        </li>
-      )
+    var items = this.pages.map(function(page) {
+      return <li class={`VuePagination__pagination-item ${theme.item} ${this.activeClass(page)}`}>
+      <a class={`${theme.link} ${this.activeClass(page)}`} 
+      href="javascript:void(0)"
+      role="button"
+      on-click={this.setPage.bind(this, page)}>{page}</a>
+      </li>
     }.bind(this));
     
     return <div class={`VuePagination ${theme.wrapper}`}><nav class={`${theme.nav}`}>
