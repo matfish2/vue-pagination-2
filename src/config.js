@@ -1,6 +1,7 @@
 export default ()=>{
     return {
         format: true,
+        chunk: 10,
         chunksNavigation:'fixed',
         edgeNavigation: false,
         theme:'bootstrap3',

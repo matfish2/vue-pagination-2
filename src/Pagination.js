@@ -71,10 +71,10 @@ module.exports = {
       }
       
       if (typeof themes[this.opts.theme]===undefined) {
-        throw `vue-pagination-2: the theme ${this.theme} does not exist`;
+        throw `vue-pagination-2: the theme ${this.opts.theme} does not exist`;
       }
       
-      return themes[this.theme];
+      return themes[this.opts.theme];
     },      
     page() {
       return this.vuex?this.$store.state[this.for].page:this.Page;
