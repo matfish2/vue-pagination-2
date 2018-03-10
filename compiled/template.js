@@ -5,12 +5,47 @@ module.exports = function () {
   return function (h) {
 
     var theme = this.Theme;
-    var alignText = this.align + "Text";
     var items = [];
     var prevChunk = '';
     var nextChunk = '';
+    var firstPage = '';
+    var lastPage = '';
 
-    if (this.chunksNavigation === 'fixed') {
+    if (this.opts.edgeNavigation && this.totalChunks > 1) {
+      firstPage = h(
+        'li',
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' VuePagination__pagination-item-prev-chunk' },
+        [h(
+          'a',
+          { 'class': theme.link,
+            attrs: { href: 'javascript:void(0);'
+            },
+            on: {
+              'click': this.setPage.bind(this, 1)
+            }
+          },
+          [this.opts.texts.first]
+        )]
+      );
+
+      lastPage = h(
+        'li',
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' VuePagination__pagination-item-prev-chunk' },
+        [h(
+          'a',
+          { 'class': theme.link,
+            attrs: { href: 'javascript:void(0);'
+            },
+            on: {
+              'click': this.setPage.bind(this, this.totalPages)
+            }
+          },
+          [this.opts.texts.last]
+        )]
+      );
+    }
+
+    if (this.opts.chunksNavigation === 'fixed') {
 
       prevChunk = h(
         'li',
@@ -81,7 +116,7 @@ module.exports = function () {
             }],
 
             'class': theme.list + ' VuePagination__pagination' },
-          [prevChunk, h(
+          [firstPage, prevChunk, h(
             'li',
             { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.prev + ' VuePagination__pagination-item-prev-page ' + this.allowedPageClass(this.page - 1) },
             [h(
@@ -111,7 +146,7 @@ module.exports = function () {
               },
               ['>']
             )]
-          ), nextChunk]
+          ), nextChunk, lastPage]
         ), h(
           'p',
           {

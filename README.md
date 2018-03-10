@@ -1,5 +1,7 @@
 # Vue Pagination 2
 
+> Breaking change on version 1.5.0: Due to a growing number of options, many of the optional props moved into a dedicated `options` object
+
 [Click here](https://jsfiddle.net/matfish2/c9wp2k63) to see it in action.
 
 Note: This package is for use with Vuejs 2.
@@ -64,19 +66,27 @@ props:
 * `for` `string` `optional` unique identifier for the component instance.
 * `records` `number` `required` number of records
 * `per-page` `number` `optional` records per page. Default: `25`
-* `chunk` `number` `optional` max pages per chunk. Default: `10`
-* `chunks-navigation` `string` `optional` Which method to use when navigating outside chunks boundries. Default: `fixed`. Options are:  
-  * `scroll` - the range of pages presented will incrementally change when navigating to a page outside the chunk (e.g 1-10 will become 2-11 once the user presses the next arrow to move to page 11). 
-  * `fixed` - navigation will occur between fixed chunks (e.g 1-10, 11-20, 21-30 etc.). Double arrows will be added to allow navigation to the beginning of the previous or next chunk. 
 * `vuex` `boolean` `optional` Use vuex to manage state. Default: `false`
-* `theme` `string` CSS theme used for styling. Supported: `bootstrap3`, `bootstrap4`,`bulma`. Default: `bootstrap3`.
-* `format` `boolean` `optional` Format numbers using a separating comma. Default: `true`
-* `count-text` `string` `optional` total records text. It can consist of up to 3 parts, divided by `|`.
-  * First part: used when there are multiple pages
-  * Second part: used when there is only one page
-  * Third part: used when there is only one record.
+* `options` `object` `optional`:
+  * `chunk` `number` max pages per chunk. Default: `10`
+  * `chunksNavigation` `string` Which method to use when navigating outside chunks boundries. Default: `fixed`. Options are:  
+    * `scroll` - the range of pages presented will incrementally change when navigating to a page outside the chunk (e.g 1-10 will become 2-11 once the user presses the next arrow to move to page 11). 
+    * `fixed` - navigation will occur between fixed chunks (e.g 1-10, 11-20, 21-30 etc.). Double arrows will be added to allow navigation to the beginning of the previous or next chunk. 
+  * `theme` `string` CSS theme used for styling. Supported: `bootstrap3`, `bootstrap4`,`bulma`. Default: `bootstrap3`.
+  * `format` `boolean` Format numbers using a separating comma. Default: `true`
+  * `edgeNavigation` Show links to first and last pages. Default: `false`
+  * `texts` `object` `optional` 
+    * `count` total records text. It can consist of up to 3 parts, divided by `|`.
+      * First part: used when there are multiple pages
+      * Second part: used when there is only one page
+      * Third part: used when there is only one record.
+    
+      Default: `Showing {from} to {to} of {count} records|{count} records|One record`
+    
+    * `first` First page text. Default: `First`
+    * `last` last page text. Default: `Last` 
+     
 
-  Default: `Showing {from} to {to} of {count} records|{count} records|One record`
 
   Note: if you want to display the page number rather than the records range, use `{page}` and `{pages}` as a placeholders. 
   E.g: `Showing page {page} out of {pages}`

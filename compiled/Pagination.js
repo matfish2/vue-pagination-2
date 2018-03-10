@@ -2,10 +2,21 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
+var _merge = require('merge');
+
+var _merge2 = _interopRequireDefault(_merge);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var template = require('./template.js');
 var bus = require('./bus');
+
 
 module.exports = {
   render: template.call(undefined),
@@ -13,13 +24,6 @@ module.exports = {
     for: {
       type: String,
       required: false
-    },
-    theme: {
-      default: 'bootstrap3'
-    },
-    align: {
-      type: String,
-      default: 'center'
     },
     records: {
       type: Number,
@@ -29,27 +33,11 @@ module.exports = {
       type: Number,
       default: 25
     },
-    chunk: {
-      type: Number,
-      default: 10
-    },
-    chunksNavigation: {
-      type: String,
-      default: 'fixed',
-      validator: function validator(value) {
-        return ['scroll', 'fixed'].indexOf(value) > -1;
-      }
-    },
-    countText: {
-      type: String,
-      default: 'Showing {from} to {to} of {count} records|{count} records|One record'
-    },
     vuex: {
       type: Boolean
     },
-    format: {
-      type: Boolean,
-      default: true
+    options: {
+      type: Object
     }
   },
   created: function created() {
@@ -80,10 +68,13 @@ module.exports = {
     };
   },
   computed: {
+    opts: function opts() {
+      return (0, _merge2.default)((0, _config2.default)(), this.options);
+    },
     Theme: function Theme() {
 
-      if (_typeof(this.theme) === 'object') {
-        return this.theme;
+      if (_typeof(this.opts.theme) === 'object') {
+        return this.opts.theme;
       }
 
       var themes = {
@@ -92,7 +83,7 @@ module.exports = {
         bulma: require('./themes/bulma')
       };
 
-      if (_typeof(themes[this.theme]) === undefined) {
+      if (_typeof(themes[this.opts.theme]) === undefined) {
         throw 'vue-pagination-2: the theme ' + this.theme + ' does not exist';
       }
 
@@ -111,32 +102,32 @@ module.exports = {
       return this.records ? Math.ceil(this.records / this.perPage) : 1;
     },
     totalChunks: function totalChunks() {
-      return Math.ceil(this.totalPages / this.chunk);
+      return Math.ceil(this.totalPages / this.opts.chunk);
     },
     currentChunk: function currentChunk() {
-      return Math.ceil(this.page / this.chunk);
+      return Math.ceil(this.page / this.opts.chunk);
     },
     paginationStart: function paginationStart() {
 
-      if (this.chunksNavigation === 'scroll') {
+      if (this.opts.chunksNavigation === 'scroll') {
         return this.firstPage;
       }
 
-      return (this.currentChunk - 1) * this.chunk + 1;
+      return (this.currentChunk - 1) * this.opts.chunk + 1;
     },
     pagesInCurrentChunk: function pagesInCurrentChunk() {
-      return this.paginationStart + this.chunk <= this.totalPages ? this.chunk : this.totalPages - this.paginationStart + 1;
+      return this.paginationStart + this.opts.chunk <= this.totalPages ? this.opts.chunk : this.totalPages - this.paginationStart + 1;
     },
     count: function count() {
 
-      if (/{page}/.test(this.countText)) {
+      if (/{page}/.test(this.opts.texts.count)) {
 
         if (this.totalPages <= 1) return '';
 
-        return this.countText.replace('{page}', this.page).replace('{pages}', this.totalPages);
+        return this.opts.texts.count.replace('{page}', this.page).replace('{pages}', this.totalPages);
       }
 
-      var parts = this.countText.split('|');
+      var parts = this.opts.texts.count.split('|');
       var from = (this.page - 1) * this.perPage + 1;
       var to = this.page == this.totalPages ? this.records : from + this.perPage - 1;
       var i = Math.min(this.records == 1 ? 2 : this.totalPages == 1 ? 1 : 0, parts.length - 1);
@@ -166,7 +157,7 @@ module.exports = {
 
     next: function next() {
       var page = this.page + 1;
-      if (this.chunksNavigation === 'scroll' && this.allowedPage(page) && !this.inDisplay(page)) {
+      if (this.opts.chunksNavigation === 'scroll' && this.allowedPage(page) && !this.inDisplay(page)) {
         this.firstPage++;
       }
       return this.setPage(page);
@@ -174,7 +165,7 @@ module.exports = {
     prev: function prev() {
       var page = this.page - 1;
 
-      if (this.chunksNavigation === 'scroll' && this.allowedPage(page) && !this.inDisplay(page)) {
+      if (this.opts.chunksNavigation === 'scroll' && this.allowedPage(page) && !this.inDisplay(page)) {
         this.firstPage--;
       }
 
@@ -183,7 +174,7 @@ module.exports = {
     inDisplay: function inDisplay(page) {
 
       var start = this.firstPage;
-      var end = start + this.chunk - 1;
+      var end = start + this.opts.chunk - 1;
 
       return page >= start && page <= end;
     },
@@ -195,7 +186,7 @@ module.exports = {
       return this.setChunk(-1);
     },
     setChunk: function setChunk(direction) {
-      this.setPage((this.currentChunk - 1 + direction) * this.chunk + 1);
+      this.setPage((this.currentChunk - 1 + direction) * this.opts.chunk + 1);
     },
     allowedPage: function allowedPage(page) {
       return page >= 1 && page <= this.totalPages;
@@ -214,7 +205,7 @@ module.exports = {
     },
     formatNumber: function formatNumber(num) {
 
-      if (!this.format) return num;
+      if (!this.opts.format) return num;
 
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
