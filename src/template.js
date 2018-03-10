@@ -10,15 +10,17 @@ module.exports = function() {
     var lastPage = '';
     
     if (this.opts.edgeNavigation && this.totalChunks > 1) {
-      firstPage = <li class={`VuePagination__pagination-item ${theme.item} VuePagination__pagination-item-prev-chunk`}>
+      firstPage = <li class={`VuePagination__pagination-item ${theme.item} ${this.page===1?'disabled':''} VuePagination__pagination-item-prev-chunk`}>
       <a class={theme.link} 
       href="javascript:void(0);"
+      disabled={this.page===1}
       on-click={this.setPage.bind(this, 1)}>{this.opts.texts.first}</a>
       </li>
       
-      lastPage = <li class={`VuePagination__pagination-item ${theme.item} VuePagination__pagination-item-prev-chunk`}>
+      lastPage = <li class={`VuePagination__pagination-item ${theme.item} ${this.page===this.totalPages?'disabled':''} VuePagination__pagination-item-prev-chunk`}>
       <a class={theme.link} 
       href="javascript:void(0);"
+      disabled={this.page===this.totalPages}
       on-click={this.setPage.bind(this, this.totalPages)}>{this.opts.texts.last}</a>
       </li>
     }
