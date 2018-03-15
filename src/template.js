@@ -3,11 +3,21 @@ module.exports = function() {
   return function(h) {
     
     var theme = this.Theme;
-    var items = [];
     var prevChunk = '';
     var nextChunk = '';
     var firstPage = '';
     var lastPage = '';
+    var items = this.pages.map(function(page) {
+      
+      return <li class={`VuePagination__pagination-item ${theme.item} ${this.activeClass(page)}`}>
+      <a class={`${theme.link} ${this.activeClass(page)}`} 
+      href="javascript:void(0)"
+      role="button"
+      on-click={this.setPage.bind(this, page)}>{page}</a>
+      </li>
+      
+    }.bind(this));
+    
     
     if (this.opts.edgeNavigation && this.totalChunks > 1) {
       firstPage = <li class={`VuePagination__pagination-item ${theme.item} ${this.page===1?theme.disabled:''} VuePagination__pagination-item-prev-chunk`}>
@@ -43,16 +53,6 @@ module.exports = function() {
       
     }
     
-    this.pages.map(function(page) {
-      items.push(
-        <li class={`VuePagination__pagination-item ${theme.item} ${this.activeClass(page)}`}>
-        <a class={`${theme.link} ${this.activeClass(page)}`} 
-        href="javascript:void(0)"
-        role="button"
-        on-click={this.setPage.bind(this, page)}>{page}</a>
-        </li>
-      )
-    }.bind(this));
     
     return <div class={`VuePagination ${theme.wrapper}`}><nav class={`${theme.nav}`}>
     <ul v-show={this.totalPages>1}

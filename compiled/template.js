@@ -5,11 +5,29 @@ module.exports = function () {
   return function (h) {
 
     var theme = this.Theme;
-    var items = [];
     var prevChunk = '';
     var nextChunk = '';
     var firstPage = '';
     var lastPage = '';
+    var items = this.pages.map(function (page) {
+
+      return h(
+        'li',
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + this.activeClass(page) },
+        [h(
+          'a',
+          { 'class': theme.link + ' ' + this.activeClass(page),
+            attrs: { href: 'javascript:void(0)',
+              role: 'button'
+            },
+            on: {
+              'click': this.setPage.bind(this, page)
+            }
+          },
+          [page]
+        )]
+      );
+    }.bind(this));
 
     if (this.opts.edgeNavigation && this.totalChunks > 1) {
       firstPage = h(
@@ -83,25 +101,6 @@ module.exports = function () {
         )]
       );
     }
-
-    this.pages.map(function (page) {
-      items.push(h(
-        'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + this.activeClass(page) },
-        [h(
-          'a',
-          { 'class': theme.link + ' ' + this.activeClass(page),
-            attrs: { href: 'javascript:void(0)',
-              role: 'button'
-            },
-            on: {
-              'click': this.setPage.bind(this, page)
-            }
-          },
-          [page]
-        )]
-      ));
-    }.bind(this));
 
     return h(
       'div',
