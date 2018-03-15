@@ -195,10 +195,10 @@ module.exports = {
       return direction == 1 && this.currentChunk < this.totalChunks || direction == -1 && this.currentChunk > 1;
     },
     allowedPageClass: function allowedPageClass(direction) {
-      return this.allowedPage(direction) ? '' : 'disabled';
+      return this.allowedPage(direction) ? '' : this.Theme.disabled;
     },
     allowedChunkClass: function allowedChunkClass(direction) {
-      return this.allowedChunk(direction) ? '' : 'disabled';
+      return this.allowedChunk(direction) ? '' : this.Theme.disabled;
     },
     activeClass: function activeClass(page) {
       return this.page == page ? this.Theme.active : '';

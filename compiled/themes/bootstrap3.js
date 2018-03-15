@@ -9,5 +9,6 @@ module.exports = {
     link: 'page-link',
     next: '',
     prev: '',
-    active: 'active'
+    active: 'active',
+    disabled: 'disabled'
 };

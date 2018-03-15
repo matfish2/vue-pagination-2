@@ -9,5 +9,6 @@ module.exports = {
     link: 'pagination-link',
     next: '',
     prev: '',
-    active: 'is-current'
+    active: 'is-current',
+    disabled: '' // uses the disabled HTML attirbute
 };

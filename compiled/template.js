@@ -14,7 +14,7 @@ module.exports = function () {
     if (this.opts.edgeNavigation && this.totalChunks > 1) {
       firstPage = h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === 1 ? 'disabled' : '') + ' VuePagination__pagination-item-prev-chunk' },
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === 1 ? theme.disabled : '') + ' VuePagination__pagination-item-prev-chunk' },
         [h(
           'a',
           { 'class': theme.link,
@@ -31,7 +31,7 @@ module.exports = function () {
 
       lastPage = h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === this.totalPages ? 'disabled' : '') + ' VuePagination__pagination-item-prev-chunk' },
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === this.totalPages ? theme.disabled : '') + ' VuePagination__pagination-item-prev-chunk' },
         [h(
           'a',
           { 'class': theme.link,

@@ -188,10 +188,10 @@ module.exports = {
       ||  (direction==-1 && this.currentChunk>1);
     },
     allowedPageClass: function(direction) {
-      return this.allowedPage(direction)?'':'disabled';
+      return this.allowedPage(direction)?'':this.Theme.disabled;
     },
     allowedChunkClass: function(direction) {
-      return this.allowedChunk(direction)?'':'disabled';
+      return this.allowedChunk(direction)?'':this.Theme.disabled;
     },
     activeClass: function(page) {
       return this.page==page?this.Theme.active:'';
