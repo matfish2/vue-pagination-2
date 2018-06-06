@@ -1,8 +1,24 @@
 var path = require('path')
 var webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/Pagination.js',
+  optimization: {
+    minimizer: [
+      // we specify a custom UglifyJsPlugin here to get source maps in production
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        uglifyOptions: {
+          compress: false,
+          ecma: 6,
+          mangle: true
+        },
+        sourceMap: true
+      })
+    ]
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -36,15 +52,6 @@ module.exports.plugins = (module.exports.plugins || []).concat([
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: '"production"'
-    }
-  }),
-  new webpack.optimize.UglifyJsPlugin({
-    sourceMap:false,
-    output:{
-      comments:false
-    },
-    compress: {
-      warnings: false
     }
   }),
   new webpack.LoaderOptionsPlugin({

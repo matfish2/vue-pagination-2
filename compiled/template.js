@@ -13,16 +13,16 @@ module.exports = function () {
 
       return h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + this.activeClass(page) },
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + this.activeClass(page),
+          on: {
+            'click': this.setPage.bind(this, page)
+          }
+        },
         [h(
           'a',
           { 'class': theme.link + ' ' + this.activeClass(page),
             attrs: { href: 'javascript:void(0)',
-              role: 'button'
-            },
-            on: {
-              'click': this.setPage.bind(this, page)
-            }
+              role: 'button' }
           },
           [page]
         )]
@@ -32,16 +32,16 @@ module.exports = function () {
     if (this.opts.edgeNavigation && this.totalChunks > 1) {
       firstPage = h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === 1 ? theme.disabled : '') + ' VuePagination__pagination-item-prev-chunk' },
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === 1 ? theme.disabled : '') + ' VuePagination__pagination-item-prev-chunk',
+          on: {
+            'click': this.setPage.bind(this, 1)
+          }
+        },
         [h(
           'a',
           { 'class': theme.link,
             attrs: { href: 'javascript:void(0);',
-              disabled: this.page === 1
-            },
-            on: {
-              'click': this.setPage.bind(this, 1)
-            }
+              disabled: this.page === 1 }
           },
           [this.opts.texts.first]
         )]
@@ -49,16 +49,16 @@ module.exports = function () {
 
       lastPage = h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === this.totalPages ? theme.disabled : '') + ' VuePagination__pagination-item-prev-chunk' },
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === this.totalPages ? theme.disabled : '') + ' VuePagination__pagination-item-prev-chunk',
+          on: {
+            'click': this.setPage.bind(this, this.totalPages)
+          }
+        },
         [h(
           'a',
           { 'class': theme.link,
             attrs: { href: 'javascript:void(0);',
-              disabled: this.page === this.totalPages
-            },
-            on: {
-              'click': this.setPage.bind(this, this.totalPages)
-            }
+              disabled: this.page === this.totalPages }
           },
           [this.opts.texts.last]
         )]
@@ -69,16 +69,16 @@ module.exports = function () {
 
       prevChunk = h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.prev + ' VuePagination__pagination-item-prev-chunk ' + this.allowedChunkClass(-1) },
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.prev + ' VuePagination__pagination-item-prev-chunk ' + this.allowedChunkClass(-1),
+          on: {
+            'click': this.setChunk.bind(this, -1)
+          }
+        },
         [h(
           'a',
           { 'class': theme.link,
             attrs: { href: 'javascript:void(0);',
-              disabled: !!this.allowedChunkClass(-1)
-            },
-            on: {
-              'click': this.setChunk.bind(this, -1)
-            }
+              disabled: !!this.allowedChunkClass(-1) }
           },
           ['<<']
         )]
@@ -86,16 +86,16 @@ module.exports = function () {
 
       nextChunk = h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.next + ' VuePagination__pagination-item-next-chunk ' + this.allowedChunkClass(1) },
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.next + ' VuePagination__pagination-item-next-chunk ' + this.allowedChunkClass(1),
+          on: {
+            'click': this.setChunk.bind(this, 1)
+          }
+        },
         [h(
           'a',
           { 'class': theme.link,
             attrs: { href: 'javascript:void(0);',
-              disabled: !!this.allowedChunkClass(1)
-            },
-            on: {
-              'click': this.setChunk.bind(this, 1)
-            }
+              disabled: !!this.allowedChunkClass(1) }
           },
           ['>>']
         )]
@@ -119,30 +119,32 @@ module.exports = function () {
             'class': theme.list + ' VuePagination__pagination' },
           [firstPage, prevChunk, h(
             'li',
-            { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.prev + ' VuePagination__pagination-item-prev-page ' + this.allowedPageClass(this.page - 1) },
+            { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.prev + ' VuePagination__pagination-item-prev-page ' + this.allowedPageClass(this.page - 1),
+              on: {
+                'click': this.prev.bind(this)
+              }
+            },
             [h(
               'a',
               { 'class': theme.link,
                 attrs: { href: 'javascript:void(0);',
                   disabled: !!this.allowedPageClass(this.page - 1)
-                },
-                on: {
-                  'click': this.prev.bind(this)
                 }
               },
               ['<']
             )]
           ), items, h(
             'li',
-            { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.next + ' VuePagination__pagination-item-next-page ' + this.allowedPageClass(this.page + 1) },
+            { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + theme.next + ' VuePagination__pagination-item-next-page ' + this.allowedPageClass(this.page + 1),
+              on: {
+                'click': this.next.bind(this)
+              }
+            },
             [h(
               'a',
               { 'class': theme.link,
                 attrs: { href: 'javascript:void(0);',
                   disabled: !!this.allowedPageClass(this.page + 1)
-                },
-                on: {
-                  'click': this.next.bind(this)
                 }
               },
               ['>']
