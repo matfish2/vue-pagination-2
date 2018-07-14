@@ -3,6 +3,7 @@ var webpack = require('webpack')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+  mode:'none',
   entry: './src/Pagination.js',
   optimization: {
     minimizer: [
@@ -34,7 +35,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       }
     ]
   },

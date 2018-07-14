@@ -13,3 +13,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var bus = new _vue2.default();
 
 exports.default = bus;
+module.exports = exports['default'];

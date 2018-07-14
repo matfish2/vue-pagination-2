@@ -208,7 +208,7 @@ export default {
       
       this.$emit('paginate', page);
       
-      if (this.For) {
+      if (this.For && bus) {
         bus.$emit('vue-pagination::' + this.For, page);        
       }
 
@@ -272,8 +272,10 @@ export default {
     }
   },
   beforeDestroy() {
-    bus.$off();
-    bus.$destroy();
+    if (bus) {
+      bus.$off();
+      bus.$destroy();
+    }
   }
 }
 

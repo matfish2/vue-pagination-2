@@ -225,7 +225,7 @@ exports.default = {
 
       this.$emit('paginate', page);
 
-      if (this.For) {
+      if (this.For && bus) {
         bus.$emit('vue-pagination::' + this.For, page);
       }
 
@@ -290,8 +290,10 @@ exports.default = {
     }
   },
   beforeDestroy: function beforeDestroy() {
-    bus.$off();
-    bus.$destroy();
+    if (bus) {
+      bus.$off();
+      bus.$destroy();
+    }
   }
 };
 
@@ -301,3 +303,4 @@ function range(start, count) {
     return index + start;
   });
 }
+module.exports = exports['default'];
