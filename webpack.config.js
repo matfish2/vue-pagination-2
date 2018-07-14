@@ -23,7 +23,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'vue-pagination-2.min.js',
-    libraryTarget:'var',
+    libraryTarget:'window',
     library:'Pagination'
   },
   externals: {
@@ -34,7 +34,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       }
     ]
   },
