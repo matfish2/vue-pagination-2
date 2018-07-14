@@ -163,3 +163,19 @@ All methods return `true` if the page is legal and was thus set, or `false` othe
 * `totalPages`
 * `totalChunks`
 * `currentChunk`
+
+# Custom Template
+
+You can easily build your own template by copying `src/Pagination.vue` to your project as a starting point and modifying the contents to your needs. 
+
+Be sure to modify the import path from:
+
+```js
+import RenderlessPagination from './RenderlessPagination.js';
+```
+
+to:
+
+```js
+import RenderlessPagination from 'vue-pagination-2/compiled/RenderlessPagination.js';
+```

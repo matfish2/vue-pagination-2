@@ -70,7 +70,6 @@
 <script>
 
 import RenderlessPagination from './RenderlessPagination.js';
-import merge from 'merge';
 
 export default {
     props:{
