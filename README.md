@@ -168,7 +168,9 @@ All methods return `true` if the page is legal and was thus set, or `false` othe
 
 You can easily build your own template by copying `src/Pagination.vue` to your project as a starting point and modifying the contents to your needs. 
 
-Be sure to modify the import path from:
+Note:
+
+* Be sure to modify the import path from:
 
 ```js
 import RenderlessPagination from './RenderlessPagination.js';
@@ -179,3 +181,6 @@ to:
 ```js
 import RenderlessPagination from 'vue-pagination-2/compiled/RenderlessPagination.js';
 ```
+
+* Only modify the content under the `RenderLessPagination` wrapping component
+* Do NOT remove any binding or event handlers 
