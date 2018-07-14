@@ -66,6 +66,7 @@ props:
 * `for` `string` `optional` unique identifier for the component instance.
 * `records` `number` `required` number of records
 * `per-page` `number` `optional` records per page. Default: `25`
+* `page` `number` Initial Page. Default: `1`
 * `vuex` `boolean` `optional` Use vuex to manage state. Default: `false`
 * `options` `object` `optional`:
   * `chunk` `number` max pages per chunk. Default: `10`
