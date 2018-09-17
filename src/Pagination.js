@@ -1,11 +1,18 @@
 let template = require('./template.js');
-let bus = require('./bus');
 import defaultOptions from './config';
 import merge from 'merge';
 
 module.exports = {
   render:template.call(this),
+  model:{
+    prop: 'page',
+    event: 'paginate'
+  },
   props: {
+    page:{
+      type: Number,
+      required: true
+    },
     for: {
       type: String,
       required: false
@@ -25,33 +32,16 @@ module.exports = {
       type: Object
     }
   },
-  created: function() {
-    
-    if (!this.vuex) return;
-    
-    if (!this.for) {
-      throw new Error('vue-pagination-2: The "for" prop is required when using vuex');
-    }
-    
-    let name = this.for;
-    
-    if (this.$store.state[name]) return;
-    
-    this.$store.registerModule(this.for,  {
-      state: {
-        page: 1
-      },
-      mutations: {
-        [`${name}/PAGINATE`] (state, page) {
-          state.page = page
-        }
-      }
-    })
-  },
   data: function() {
     return  {
-      Page:1,
-      firstPage:1
+      firstPage: this.page
+    }
+  },
+  watch:{
+    page(page) {
+      if (this.opts.chunksNavigation==='scroll' && this.allowedPage(page) && !this.inDisplay(page)) {
+        this.firstPage = page;
+      }
     }
   },
   computed: {
@@ -76,9 +66,6 @@ module.exports = {
       
       return themes[this.opts.theme];
     },      
-    page() {
-      return this.vuex?this.$store.state[this.for].page:this.Page;
-    },
     pages: function() {
       if (!this.records)
       return [];
@@ -136,17 +123,7 @@ module.exports = {
       }
     },
     paginate(page) {
-      if (this.vuex) {
-        this.$store.commit(`${this.for}/PAGINATE`,  page);
-      } else {
-        this.Page = page;
-      }
-      
       this.$emit('paginate', page);
-      
-      if (this.for) {
-        bus.$emit('vue-pagination::' + this.for, page);        
-      }
     },
     next: function() {
       var page = this.page + 1;
@@ -202,10 +179,6 @@ module.exports = {
       
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-  },
-  beforeDestroy() {
-    bus.$off();
-    bus.$destroy();
   }
 }
 

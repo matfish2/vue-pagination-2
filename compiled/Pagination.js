@@ -12,15 +12,20 @@ var _merge2 = _interopRequireDefault(_merge);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var template = require('./template.js');
-var bus = require('./bus');
 
 
 module.exports = {
   render: template.call(undefined),
+  model: {
+    prop: 'page',
+    event: 'paginate'
+  },
   props: {
+    page: {
+      type: Number,
+      required: true
+    },
     for: {
       type: String,
       required: false
@@ -40,32 +45,17 @@ module.exports = {
       type: Object
     }
   },
-  created: function created() {
-
-    if (!this.vuex) return;
-
-    if (!this.for) {
-      throw new Error('vue-pagination-2: The "for" prop is required when using vuex');
-    }
-
-    var name = this.for;
-
-    if (this.$store.state[name]) return;
-
-    this.$store.registerModule(this.for, {
-      state: {
-        page: 1
-      },
-      mutations: _defineProperty({}, name + '/PAGINATE', function undefined(state, page) {
-        state.page = page;
-      })
-    });
-  },
   data: function data() {
     return {
-      Page: 1,
-      firstPage: 1
+      firstPage: this.page
     };
+  },
+  watch: {
+    page: function page(_page) {
+      if (this.opts.chunksNavigation === 'scroll' && this.allowedPage(_page) && !this.inDisplay(_page)) {
+        this.firstPage = _page;
+      }
+    }
   },
   computed: {
     opts: function opts() {
@@ -88,9 +78,6 @@ module.exports = {
       }
 
       return themes[this.opts.theme];
-    },
-    page: function page() {
-      return this.vuex ? this.$store.state[this.for].page : this.Page;
     },
 
     pages: function pages() {
@@ -142,17 +129,7 @@ module.exports = {
       }
     },
     paginate: function paginate(page) {
-      if (this.vuex) {
-        this.$store.commit(this.for + '/PAGINATE', page);
-      } else {
-        this.Page = page;
-      }
-
       this.$emit('paginate', page);
-
-      if (this.for) {
-        bus.$emit('vue-pagination::' + this.for, page);
-      }
     },
 
     next: function next() {
@@ -209,10 +186,6 @@ module.exports = {
 
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-  },
-  beforeDestroy: function beforeDestroy() {
-    bus.$off();
-    bus.$destroy();
   }
 };
 

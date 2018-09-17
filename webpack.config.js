@@ -38,15 +38,15 @@ module.exports.plugins = (module.exports.plugins || []).concat([
       NODE_ENV: '"production"'
     }
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    sourceMap:false,
-    output:{
-      comments:false
-    },
-    compress: {
-      warnings: false
-    }
-  }),
+  // new webpack.optimize.UglifyJsPlugin({
+  //   sourceMap:false,
+  //   output:{
+  //     comments:false
+  //   },
+  //   compress: {
+  //     warnings: false
+  //   }
+  // }),
   new webpack.LoaderOptionsPlugin({
     minimize: true
   })
