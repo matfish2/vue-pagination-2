@@ -32,7 +32,7 @@ Simple, generic and non-intrusive pagination component for Vue.js version 2.
 
 import the script:
 
-    import {Pagination} from 'vue-pagination-2';
+    import Pagination from 'vue-pagination-2';
 
 ## Script tag
 
