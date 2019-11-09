@@ -110,7 +110,8 @@ module.exports = {
     paginationStart: function paginationStart() {
 
       if (this.opts.chunksNavigation === 'scroll') {
-        return this.firstPage;
+        var page =  this.Page - this.opts.chunk + 1;
+        return page > 0 ? page : 1;
       }
 
       return (this.currentChunk - 1) * this.opts.chunk + 1;
