@@ -41,7 +41,7 @@ module.exports = function() {
       onClick={this.setChunk.bind(this,-1)}>
       <a class={theme.link} 
       href="javascript:void(0);"
-      disabled={!!this.allowedChunkClass(-1)}>&lt;&lt;</a>
+      disabled={!!this.allowedChunkClass(-1)}>{this.opts.texts.prevChunk}</a>
       </li>
       
       nextChunk = <li class={`VuePagination__pagination-item ${theme.item} ${theme.next} VuePagination__pagination-item-next-chunk ${this.allowedChunkClass(1)}`}
@@ -49,7 +49,7 @@ module.exports = function() {
       >
       <a class={theme.link} 
       href="javascript:void(0);"
-      disabled={!!this.allowedChunkClass(1)}>&gt;&gt;</a>
+      disabled={!!this.allowedChunkClass(1)}>{this.opts.texts.nextChunk}</a>
       </li>;
       
     }
@@ -65,7 +65,7 @@ module.exports = function() {
     <a class={theme.link} 
     href="javascript:void(0);"
     disabled={!!this.allowedPageClass(this.page-1)} 
-    >&lt;</a>
+    >{this.opts.texts.prevPage}</a>
     </li>
     {items}
     <li class={`VuePagination__pagination-item ${theme.item} ${theme.next} VuePagination__pagination-item-next-page ${this.allowedPageClass(this.page+1)}`}
@@ -73,7 +73,7 @@ module.exports = function() {
     <a class={theme.link} 
     href="javascript:void(0);"
     disabled={!!this.allowedPageClass(this.page+1)} 
-    >&gt;</a>
+    >{this.opts.texts.nextPage}</a>
     </li>
     {nextChunk}
     {lastPage}
