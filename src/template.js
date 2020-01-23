@@ -19,13 +19,13 @@ module.exports = function() {
     
     
     if (this.opts.edgeNavigation && this.totalChunks > 1) {
-      firstPage = <li class={`VuePagination__pagination-item ${theme.item} ${this.page===1?theme.disabled:''} VuePagination__pagination-item-prev-chunk`}
+      firstPage = <li class={`VuePagination__pagination-item ${theme.item} ${this.page===1?theme.disabled:''} VuePagination__pagination-item-first-page`}
       onClick={this.setPage.bind(this, 1)}>
       <a class={theme.link} 
       disabled={this.page===1}>{this.opts.texts.first}</a>
       </li>
       
-      lastPage = <li class={`VuePagination__pagination-item ${theme.item} ${this.page===this.totalPages?theme.disabled:''} VuePagination__pagination-item-prev-chunk`}
+      lastPage = <li class={`VuePagination__pagination-item ${theme.item} ${this.page===this.totalPages?theme.disabled:''} VuePagination__pagination-item-last-page`}
       onClick={this.setPage.bind(this, this.totalPages)}>
       <a class={theme.link} 
       disabled={this.page===this.totalPages}>{this.opts.texts.last}</a>
