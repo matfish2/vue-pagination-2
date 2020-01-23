@@ -332,7 +332,6 @@ props:{
 data: function() {
     return {
         aProps:{
-            href:"javascript:void(0);",
             role:"button"
         }
     }

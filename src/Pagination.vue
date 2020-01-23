@@ -99,7 +99,6 @@ export default {
   data() {
       return {
           aProps:{
-              href:"javascript:void(0);",
               role:"button"
           }
       }
