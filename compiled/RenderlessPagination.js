@@ -126,7 +126,8 @@ exports.default = {
         page: function page(val) {
             if (this.opts.chunksNavigation === 'scroll' && this.allowedPage(val) && !this.inDisplay(val)) {
                 if (val === this.totalPages) {
-                    this.firstPage = val - this.opts.chunk + 1;
+                    var first = val - this.opts.chunk + 1;
+                    this.firstPage = first >= 1 ? first : 1;
                 } else {
                     this.firstPage = val;
                 }
