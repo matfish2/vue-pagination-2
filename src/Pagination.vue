@@ -1,112 +1,50 @@
 <template>
-<RenderlessPagination @paginate="paginate">
-    <div class='VuePagination' :class='theme.wrapper' 
-         slot-scope="{ 
-         pages,
-         pageEvents,
-         hasEdgeNav,
-         setFirstPage,
-         setLastPage,
-         setPrevChunk,
-         setNextChunk,
-         hasChunksNav,
-         prevChunkProps,
-         nextChunkProps,
-         firstPageProps,
-         lastPageProps,
-         pageClasses,
-         showPagination, 
-         setPrevPage, 
-         setNextPage,
-         prevProps,
-         nextProps,
-         hasRecords,
-         theme, 
-         texts,
-         count }">
+    <div class='VuePagination' :class='props.theme.wrapper'>
+        <nav :class='props.theme.nav'>
 
-        <nav :class='theme.nav'>
-      
-        <ul v-show="showPagination" :class="theme.list">
-        
-            <li v-if="hasEdgeNav" :class='theme.firstPage' @click="setFirstPage">
-                <a v-bind="{...aProps,...firstPageProps}">{{texts.first}}</a>
-            </li>
-            
-            <li v-if="hasChunksNav" :class='theme.prevChunk' @click="setPrevChunk">
-                <a v-bind="{...aProps, ...prevChunkProps}">{{texts.prevChunk}}</a>
-            </li>
-        
-            <li :class="theme.prev" @click="setPrevPage">
-                <a v-bind="{...aProps,...prevProps}">{{texts.prevPage}}</a>
-            </li>
-            
-            <li v-for="page in pages" :key="page" :class="pageClasses(page)" v-on="pageEvents(page)">
-                <a v-bind="aProps" :class="theme.link">{{page}}</a>
-            </li>
+            <ul v-show="props.showPagination" :class="props.theme.list">
 
-            <li :class="theme.next" @click="setNextPage">
-                <a v-bind="{...aProps, ...nextProps}">{{texts.nextPage}}</a>
-            </li>
+                <li v-if="props.hasEdgeNav" :class='props.theme.firstPage' @click="props.setFirstPage">
+                    <a v-bind="{...props.aProps,...props.firstPageProps}">{{props.texts.first}}</a>
+                </li>
 
-            <li v-if="hasChunksNav" :class='theme.nextChunk' @click="setNextChunk">
-                <a v-bind="{...aProps, ...nextChunkProps}">{{texts.nextChunk}}</a>
-            </li>
+                <li v-if="props.hasChunksNav" :class='props.theme.prevChunk' @click="props.setPrevChunk">
+                    <a v-bind="{...props.aProps, ...props.prevChunkProps}">{{props.texts.prevChunk}}</a>
+                </li>
 
-            <li v-if="hasEdgeNav" :class="theme.lastPage" @click="setLastPage">
-                <a v-bind="{...aProps, ...lastPageProps}">{{texts.last}}</a>
-            </li>
+                <li :class="props.theme.prev" @click="props.setPrevPage">
+                    <a v-bind="{...props.aProps,...props.prevProps}">{{props.texts.prevPage}}</a>
+                </li>
 
-        </ul>
+                <li v-for="page in props.pages" :key="page" :class="props.pageClasses(page)"
+                    v-on="props.pageEvents(page)">
+                    <a v-bind="props.aProps" :class="props.theme.link">{{page}}</a>
+                </li>
 
-        <p v-show="hasRecords" :class='theme.count'>{{count}}</p>
-        
+                <li :class="props.theme.next" @click="props.setNextPage">
+                    <a v-bind="{...props.aProps, ...props.nextProps}">{{props.texts.nextPage}}</a>
+                </li>
+
+                <li v-if="props.hasChunksNav" :class='props.theme.nextChunk' @click="props.setNextChunk">
+                    <a v-bind="{...props.aProps, ...props.nextChunkProps}">{{props.texts.nextChunk}}</a>
+                </li>
+
+                <li v-if="props.hasEdgeNav" :class="props.theme.lastPage" @click="props.setLastPage">
+                    <a v-bind="{...props.aProps, ...props.lastPageProps}">{{props.texts.last}}</a>
+                </li>
+
+            </ul>
+
+            <p v-show="props.hasRecords" :class='props.theme.count'>{{props.count}}</p>
+
         </nav>
     </div>
 
-    </RenderlessPagination>    
 </template>
 
 <script>
-
-import RenderlessPagination from './RenderlessPagination.js';
-
-export default {
-    props:{
-    for: {
-      type: String,
-      required: false
-    },
-    page:{
-        type:Number,
-        default:1
-    },
-    records: {
-      type: Number,
-      required: true
-    },
-    perPage: {
-      type: Number,
-      default: 25
-    },
-    vuex: {
-      type: Boolean
-    },
-    options:{
-      type: Object
+    export default {
+        name: 'MyPagination',
+        props: ['props']
     }
-  },
-  data() {
-      return {
-          aProps:{
-              role:"button"
-          }
-      }
-  },
-  methods:{
-      paginate(page) {
-          this.$emit('paginate', page)
-      }
-  }
-}
 </script>

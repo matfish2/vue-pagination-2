@@ -1,4 +1,4 @@
 {
-  "presets": ["es2015"],
+  "presets": ["env","stage-2"],
   "plugins": ["transform-vue-jsx","transform-with", "transform-object-rest-spread", "add-module-exports"]
 }

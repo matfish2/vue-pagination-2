@@ -1,4 +1,3 @@
 import Pagination from './Pagination';
-import PaginationEvent from './/bus';
 
-export {Pagination, PaginationEvent};
+export default Pagination;

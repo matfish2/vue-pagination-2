@@ -1,11 +1,6 @@
 # Vue Pagination 2
 
-> Breaking change on version 1.5.0: Due to a growing number of options, many of the optional props moved into a dedicated `options` object
-
 [Click here](https://jsfiddle.net/matfish2/c9wp2k63) to see it in action.
-
-Note: This package is for use with Vuejs 2.
-For version 1 please use [v-pagination](https://www.npmjs.com/package/v-pagination) instead.
 
 Simple, generic and non-intrusive pagination component for Vue.js version 2.
 
@@ -14,14 +9,13 @@ Simple, generic and non-intrusive pagination component for Vue.js version 2.
   - [NPM](#npm)
   - [Script tag](#script-tag)
 - [Usage](#usage)
-- [Handle page selection](#handle-page-selection)
-  - [Custom Event](#custom-event)
-  - [Event Bus](#event-bus)
-  - [Vuex](#vuex)
-
+    - [Custom Event](#custom-event)
+    - [Programmatic Manipulation](#programmatic-manipulation)
+    - [Computed Properties](#computed-properties)
+    - [Custom Template](#custom-template)
 # Dependencies
 
-* Vue.js (>=2.0.0-rc.1). Required.
+* Vue.js (>=2.0.0 && <3.0.0). Required.
 * CSS: Bootstrap 3 or Bootstrap 4 or Bulma.
 
 # Installation
@@ -32,7 +26,7 @@ Simple, generic and non-intrusive pagination component for Vue.js version 2.
 
 import the script:
 
-    import {Pagination} from 'vue-pagination-2';
+    import Pagination from 'vue-pagination-2';
 
 ## Script tag
 
@@ -41,7 +35,7 @@ It will export a global `Pagination` variable.
 
 # Usage
 
-## Register the component globally or locally:
+### Register the component globally or locally:
 
 ```js
 Vue.component('pagination', Pagination);
@@ -57,17 +51,25 @@ components: {
 ...
 ```
 
-HTML:
+HTML/JS:
+```js
+{
+    data() {
+       return {
+           page: 1
+       }    
+    }
+}
+```
+
 ```vue
-<pagination :records="500" @paginate="myCallback"></pagination>
+<pagination v-model="page" :records="500" @paginate="myCallback"/>
 ```
 props:
 
-* `for` `string` `optional` unique identifier for the component instance.
 * `records` `number` `required` number of records
 * `per-page` `number` `optional` records per page. Default: `25`
-* `page` `number` Initial Page. Default: `1`
-* `vuex` `boolean` `optional` Use vuex to manage state. Default: `false`
+* `v-model` `number` `required` Reference to the current page. Can be updated via the UI or programmatically
 * `options` `object` `optional`:
   * `chunk` `number` max pages per chunk. Default: `10`
   * `chunksNavigation` `string` Which method to use when navigating outside chunks boundries. Default: `fixed`. Options are:  
@@ -76,6 +78,7 @@ props:
   * `theme` `string` CSS theme used for styling. Supported: `bootstrap3`, `bootstrap4`,`bulma`. Default: `bootstrap3`.
   * `format` `boolean` Format numbers using a separating comma. Default: `true`
   * `edgeNavigation` Show links to first and last pages. Default: `false`
+  * `template` Pass your own [custom template](#custom-template)
   * `texts` `object` `optional` 
     * `count` total records text. It can consist of up to 3 parts, divided by `|`.
       * First part: used when there are multiple pages
@@ -87,68 +90,20 @@ props:
     * `first` First page text. Default: `First`
     * `last` last page text. Default: `Last` 
      
-
-
   Note: if you want to display the page number rather than the records range, use `{page}` and `{pages}` as a placeholders. 
   E.g: `Showing page {page} out of {pages}`
 
-
-# Handle page selection
-
 ## Custom Event
 
-When a page is selected a custom `paginate` event will be dispatched.
+The model you bound to the component will be automatically updated. 
+In addition, when a page is selected a custom `paginate` event will be dispatched.
 Listen to it on the component and run your callback
 
-## Event bus
+## Programmatic Manipulation
 
-Note: To use this option you must: 
+The simplest way to programmatically manipulate the page is to directly update your bound model.
 
-A. Provide a unique identifier using the `for` prop
-B. Import the pagination event bus along with the component itself:
-
-```js
-import {Pagination,PaginationEvent} from 'vue-pagination-2'
-```
-
-When a page is selected the bus will dispatched an event, using the unique id for the component.
-Listen to it on your bus and respond accordingly:
-
-```js
-PaginationEvent.$on('vue-pagination::some-entity', function(page) {
-    // display the relevant records using the page param
-});
-```
-
-## Vuex (>=2.0.0)
-
-Note: To use this option you must provide a unique identifier using the `for` prop.
-
-The component will register a module on your store using the `for` prop as the name.
-The module will have a `page` property that will contain the current page.
-vue-devtools will give you a nice overview of the data structure.
-
-If you want to latch on to an existing module on your store, use its name in the `for` prop and manuaully add the following to you store:
-
-    {
-      myModule:{
-        state:{
-        ```
-          page: 1
-        ```
-      },
-      mutations: {
-           ```
-           ['myModule/PAGINATE'](state, page) {
-                  state.page = page
-              }
-          ```
-        }
-      }
-
-# Programmatic Manipulation
-
-To programmatically set the page apply a `ref` identifier to the component and use one of the following methods:
+In addition to that you can call the following methods using a `ref` on you component:
 
 * `setPage(page)`
 * `next()`
@@ -158,29 +113,23 @@ To programmatically set the page apply a `ref` identifier to the component and u
 
 All methods return `true` if the page is legal and was thus set, or `false` otherwise.
 
-# Computed Properties
+## Computed Properties
 
 * `totalPages`
 * `totalChunks`
 * `currentChunk`
 
-# Custom Template
+## Custom Template
 
 You can easily build your own template by copying `src/Pagination.vue` to your project as a starting point and modifying the contents to your needs. 
-
-Note:
-
-* Be sure to modify the import path from:
+Then notify the component of your custom template by passing it to the `template` option.
 
 ```js
-import RenderlessPagination from './RenderlessPagination.js';
+import MyPagination from './MyPagination'
+...
+{
+    options: {
+        template: MyPagination    
+    }   
+}
 ```
-
-to:
-
-```js
-import RenderlessPagination from 'vue-pagination-2/compiled/RenderlessPagination.js';
-```
-
-* Only modify the content under the `RenderLessPagination` wrapping component
-* Do NOT remove any binding or event handlers 

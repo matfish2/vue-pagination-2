@@ -4,7 +4,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   mode:'production',
-  entry: './src/Pagination.js',
+  entry: './compiled/Pagination.js',
   optimization: {
     minimizer: [
       // we specify a custom UglifyJsPlugin here to get source maps in production

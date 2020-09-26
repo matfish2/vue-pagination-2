@@ -5,6 +5,7 @@ export default ()=>{
         chunksNavigation:'fixed',
         edgeNavigation: false,
         theme:'bootstrap3',
+        template:null,
         texts:{
             count:'Showing {from} to {to} of {count} records|{count} records|One record',
             first:'First',
