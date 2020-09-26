@@ -23,6 +23,12 @@ exports.default = {
         return {
             Page: function Page() {
                 return _this.value;
+            },
+            perPage: function perPage() {
+                return _this.perPage;
+            },
+            records: function records() {
+                return _this.records;
             }
         };
     },

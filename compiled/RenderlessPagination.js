@@ -17,7 +17,7 @@ var _merge2 = _interopRequireDefault(_merge);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-    inject: ['Page'],
+    inject: ['Page', 'records', 'perPage'],
     props: {
         itemClass: {
             required: false,
@@ -110,7 +110,8 @@ exports.default = {
             totalPages: this.totalPages,
             totalChunks: this.totalChunks,
             page: this.Page(),
-            records: this.Records
+            records: this.records(),
+            perPage: this.perPage()
         });
     },
 
@@ -118,8 +119,6 @@ exports.default = {
         return {
             firstPage: this.$parent.value,
             For: this.$parent.for,
-            Records: this.$parent.records,
-            PerPage: this.$parent.perPage,
             Options: this.$parent.options
         };
     },
@@ -137,6 +136,12 @@ exports.default = {
         }
     },
     computed: {
+        Records: function Records() {
+            return this.records();
+        },
+        PerPage: function PerPage() {
+            return this.perPage();
+        },
         opts: function opts() {
             return _merge2.default.recursive((0, _config2.default)(), this.Options);
         },

@@ -6,7 +6,9 @@ export default {
     components: {RenderlessPagination},
     provide() {
       return {
-          Page: () => this.value
+          Page: () => this.value,
+          perPage: () => this.perPage,
+          records: () => this.records
       }
     },
     render(h) {

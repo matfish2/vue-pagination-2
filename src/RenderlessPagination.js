@@ -2,7 +2,7 @@ import defaultOptions from './config';
 import merge from 'merge';
 
 export default {
-    inject: ['Page'],
+    inject: ['Page', 'records','perPage'],
     props: {
         itemClass: {
             required: false,
@@ -91,15 +91,14 @@ export default {
             totalPages: this.totalPages,
             totalChunks: this.totalChunks,
             page: this.Page(),
-            records: this.Records
+            records: this.records(),
+            perPage: this.perPage()
         });
     },
     data: function () {
         return {
             firstPage: this.$parent.value,
             For: this.$parent.for,
-            Records: this.$parent.records,
-            PerPage: this.$parent.perPage,
             Options: this.$parent.options
         }
     },
@@ -117,6 +116,12 @@ export default {
         }
     },
     computed: {
+        Records() {
+            return this.records()
+        },
+        PerPage() {
+            return this.perPage()
+        },
         opts() {
             return merge.recursive(defaultOptions(), this.Options);
         },
