@@ -21,8 +21,7 @@ module.exports = function () {
         [h(
           'a',
           { 'class': theme.link + ' ' + this.activeClass(page),
-            attrs: { href: 'javascript:void(0)',
-              role: 'button' }
+            attrs: { role: 'button' }
           },
           [page]
         )]
@@ -32,7 +31,7 @@ module.exports = function () {
     if (this.opts.edgeNavigation && this.totalChunks > 1) {
       firstPage = h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === 1 ? theme.disabled : '') + ' VuePagination__pagination-item-prev-chunk',
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === 1 ? theme.disabled : '') + ' VuePagination__pagination-item-first-page',
           on: {
             'click': this.setPage.bind(this, 1)
           }
@@ -40,8 +39,7 @@ module.exports = function () {
         [h(
           'a',
           { 'class': theme.link,
-            attrs: { href: 'javascript:void(0);',
-              disabled: this.page === 1 }
+            attrs: { disabled: this.page === 1 }
           },
           [this.opts.texts.first]
         )]
@@ -49,7 +47,7 @@ module.exports = function () {
 
       lastPage = h(
         'li',
-        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === this.totalPages ? theme.disabled : '') + ' VuePagination__pagination-item-prev-chunk',
+        { 'class': 'VuePagination__pagination-item ' + theme.item + ' ' + (this.page === this.totalPages ? theme.disabled : '') + ' VuePagination__pagination-item-last-page',
           on: {
             'click': this.setPage.bind(this, this.totalPages)
           }
@@ -57,8 +55,7 @@ module.exports = function () {
         [h(
           'a',
           { 'class': theme.link,
-            attrs: { href: 'javascript:void(0);',
-              disabled: this.page === this.totalPages }
+            attrs: { disabled: this.page === this.totalPages }
           },
           [this.opts.texts.last]
         )]
@@ -80,7 +77,7 @@ module.exports = function () {
             attrs: { href: 'javascript:void(0);',
               disabled: !!this.allowedChunkClass(-1) }
           },
-          ['<<']
+          [this.opts.texts.prevChunk]
         )]
       );
 
@@ -94,10 +91,9 @@ module.exports = function () {
         [h(
           'a',
           { 'class': theme.link,
-            attrs: { href: 'javascript:void(0);',
-              disabled: !!this.allowedChunkClass(1) }
+            attrs: { disabled: !!this.allowedChunkClass(1) }
           },
-          ['>>']
+          [this.opts.texts.nextChunk]
         )]
       );
     }
@@ -127,11 +123,10 @@ module.exports = function () {
             [h(
               'a',
               { 'class': theme.link,
-                attrs: { href: 'javascript:void(0);',
-                  disabled: !!this.allowedPageClass(this.page - 1)
+                attrs: { disabled: !!this.allowedPageClass(this.page - 1)
                 }
               },
-              ['<']
+              [this.opts.texts.prevPage]
             )]
           ), items, h(
             'li',
@@ -143,11 +138,10 @@ module.exports = function () {
             [h(
               'a',
               { 'class': theme.link,
-                attrs: { href: 'javascript:void(0);',
-                  disabled: !!this.allowedPageClass(this.page + 1)
+                attrs: { disabled: !!this.allowedPageClass(this.page + 1)
                 }
               },
-              ['>']
+              [this.opts.texts.nextPage]
             )]
           ), nextChunk, lastPage]
         ), h(

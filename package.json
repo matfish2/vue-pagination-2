@@ -19,8 +19,9 @@
   "dependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
     "merge": "^1.2.0",
-    "vue": ">=2.0.0",
-    "vuex": "^2.0.0"
+    "mitt": "2.1.0",
+    "vue": ">=3.0.0",
+    "vuex": "^4.0.0-beta.4"
   },
   "license": "MIT",
   "main": "compiled/main.js",
@@ -40,6 +41,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-no-strict": "^6.7.0",
     "babel-preset-stage-0": "^6.24.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.16.0",
     "webpack-cli": "^3.0.2"
   }

@@ -4,10 +4,10 @@
 
 [Click here](https://jsfiddle.net/matfish2/c9wp2k63) to see it in action.
 
-Note: This package is for use with Vuejs 2.
+Note: This package is for use with Vuejs 3.
 For version 1 please use [v-pagination](https://www.npmjs.com/package/v-pagination) instead.
 
-Simple, generic and non-intrusive pagination component for Vue.js version 2.
+Simple, generic and non-intrusive pagination component for Vue.js version 3.
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
@@ -21,7 +21,7 @@ Simple, generic and non-intrusive pagination component for Vue.js version 2.
 
 # Dependencies
 
-* Vue.js (>=2.0.0-rc.1). Required.
+* Vue.js (>=3.0.0). Required.
 * CSS: Bootstrap 3 or Bootstrap 4 or Bulma.
 
 # Installation
@@ -115,7 +115,7 @@ When a page is selected the bus will dispatched an event, using the unique id fo
 Listen to it on your bus and respond accordingly:
 
 ```js
-PaginationEvent.$on('vue-pagination::some-entity', function(page) {
+PaginationEvent.on('vue-pagination::some-entity', function(page) {
     // display the relevant records using the page param
 });
 ```

@@ -209,7 +209,7 @@ export default {
       this.$emit('paginate', page);
       
       if (this.For && bus) {
-        bus.$emit('vue-pagination::' + this.For, page);        
+        bus.emit('vue-pagination::' + this.For, page);        
       }
 
       this.$nextTick(()=>{
@@ -273,8 +273,8 @@ export default {
   },
   beforeDestroy() {
     if (bus) {
-      bus.$off();
-      bus.$destroy();
+      bus.off();
+      bus.all.clear();
     }
   }
 }
