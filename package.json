@@ -1,7 +1,7 @@
 {
-  "name": "vue-pagination-2",
-  "description": "Vue.js 2 pagination component",
-  "version": "3.0.5",
+  "name": "vue-pagination-3",
+  "description": "Vue.js 3 pagination component",
+  "version": "1.0.0",
   "keywords": [
     "pagination",
     "vuejs2",
@@ -19,8 +19,7 @@
   "dependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
     "merge": "^1.2.0",
-    "vue": ">=2.0.0",
-    "vuex": "^2.0.0"
+    "vue": ">=3.0.0"
   },
   "license": "MIT",
   "main": "compiled/main.js",
@@ -29,11 +28,15 @@
     "build-dist": "webpack"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "@vue/babel-plugin-jsx": "^1.0.0-rc.3",
+    "babel-core": "^7.0.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.2",
-    "babel-loader": "^7.1.5",
+    "babel-loader": "^8.1.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-vue-jsx": "^3.3.0",
     "babel-plugin-transform-with": "^1.0.0",
     "babel-preset-env": "^1.7.0",

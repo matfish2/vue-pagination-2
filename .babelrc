@@ -1,4 +1,4 @@
 {
-  "presets": ["env","stage-2"],
-  "plugins": ["transform-vue-jsx","transform-with", "transform-object-rest-spread", "add-module-exports"]
+  "presets": ["env"],
+  "plugins": ["@vue/babel-plugin-jsx", "@babel/plugin-proposal-object-rest-spread", "add-module-exports"]
 }
