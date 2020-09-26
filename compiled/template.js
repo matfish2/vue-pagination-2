@@ -23,7 +23,7 @@ module.exports = function (props) {
                     { 'class': theme.link + ' ' + this.activeClass(page),
                         attrs: { role: 'button' }
                     },
-                    [page]
+                    [this.formatNumber(page)]
                 )]
             );
         }.bind(this));

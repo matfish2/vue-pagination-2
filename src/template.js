@@ -12,7 +12,7 @@ module.exports = function(props) {
       return <li class={`VuePagination__pagination-item ${theme.item} ${this.activeClass(page)}`}
       onClick={this.setPage.bind(this, page)}>
       <a class={`${theme.link} ${this.activeClass(page)}`}
-      role="button">{page}</a>
+      role="button">{this.formatNumber(page)}</a>
       </li>
 
     }.bind(this));

@@ -92,7 +92,8 @@ export default {
             totalChunks: this.totalChunks,
             page: this.Page(),
             records: this.records(),
-            perPage: this.perPage()
+            perPage: this.perPage(),
+            formatNumber: this.formatNumber
         });
     },
     data: function () {
