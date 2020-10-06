@@ -12,11 +12,7 @@ var _merge = require("merge");
 
 var _merge2 = _interopRequireDefault(_merge);
 
-var _vue = require("vue");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && _typeof(Symbol.iterator) === "symbol") { _typeof = function (_typeof2) { function _typeof(_x) { return _typeof2.apply(this, arguments); } _typeof.toString = function () { return _typeof2.toString(); }; return _typeof; }(function (obj) { return typeof obj === "undefined" ? "undefined" : _typeof(obj); }); } else { _typeof = function (_typeof3) { function _typeof(_x2) { return _typeof3.apply(this, arguments); } _typeof.toString = function () { return _typeof3.toString(); }; return _typeof; }(function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj); }); } return _typeof(obj); }
 
 exports.default = {
   inject: ['Page', 'records', 'perPage'],
@@ -135,7 +131,7 @@ exports.default = {
         }
       }
 
-      (0, _vue.emit)('paginate', val);
+      this.$parent.$emit('paginate', val);
     }
   },
   computed: {
@@ -149,19 +145,16 @@ exports.default = {
       return _merge2.default.recursive((0, _config2.default)(), this.Options);
     },
     Theme: function Theme() {
-      if (_typeof(this.opts.theme) === 'object') {
-        return this.opts.theme;
-      }
-
+      // if (typeof this.opts.theme === 'object') {
+      //     return this.opts.theme;
+      // }
       var themes = {
         bootstrap3: require('./themes/bootstrap3'),
         bootstrap4: require('./themes/bootstrap4'),
         bulma: require('./themes/bulma')
-      };
-
-      if (_typeof(themes[this.opts.theme]) === undefined) {
-        throw "vue-pagination-2: the theme " + this.opts.theme + " does not exist";
-      }
+      }; // if (typeof themes[this.opts.theme] === undefined) {
+      //     throw `vue-pagination-2: the theme ${this.opts.theme} does not exist`;
+      // }
 
       return themes[this.opts.theme];
     },
@@ -216,9 +209,9 @@ exports.default = {
     paginate: function paginate(page) {
       var _this2 = this;
 
-      this.$parent.$emit('input', page);
+      this.$parent.$emit('update:modelValue', page);
       this.$nextTick(function () {
-        _this2.$el.querySelector('li.active a').focus();
+        console.log(_this2.$el); // this.$el.querySelector('li.active a').focus();
       });
     },
     next: function next() {

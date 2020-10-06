@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vue = require("vue");
-
 var _template = require("./template");
 
 var _template2 = _interopRequireDefault(_template);
@@ -26,7 +24,7 @@ exports.default = {
 
     return {
       Page: function Page() {
-        return _this.value;
+        return _this.modelValue;
       },
       perPage: function perPage() {
         return _this.perPage;
@@ -37,22 +35,17 @@ exports.default = {
     };
   },
   render: function render() {
-    // return h('div',{},
-    //     'hello');
-    return _vue.resolveComponent("renderless-pagination", {
-      "slots": {
-        default: function _default(props) {
-          return props.override ? (0, _vue.h)(props.override, {
-            attrs: {
-              props: props
-            }
-          }) : (0, _template2.default)(props)(_vue.h);
-        }
+    var RLPagination = Vue.resolveComponent('renderless-pagination');
+    return Vue.h(RLPagination, {}, {
+      default: function _default(props) {
+        return props.override ? Vue.h(props.override, {
+          props: props
+        }) : (0, _template2.default)(props)(Vue.h);
       }
     });
   },
   props: {
-    value: {
+    modelValue: {
       type: Number,
       required: true,
       validator: function validator(val) {

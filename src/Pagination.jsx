@@ -1,41 +1,37 @@
 import template from './template'
 import RenderlessPagination from "./RenderlessPagination";
-import {h} from 'vue'
+
+
 export default {
     name: 'Pagination',
     components: {RenderlessPagination},
     provide() {
-      return {
-          Page: () => this.value,
-          perPage: () => this.perPage,
-          records: () => this.records
-      }
+        return {
+            Page: () => this.modelValue,
+            perPage: () => this.perPage,
+            records: () => this.records
+        }
     },
     render() {
-        // return h('div',{},
-        //     'hello');
-        return <renderless-pagination slots={
-                    {
-                        default: function (props) {
-                            return props.override ? h(
-                                props.override,
-                                {
-                                    attrs: {props}
-                                }
-                            ) : template(props)(h)
-                        }
-                    }
-        }
-        >
+        const RLPagination = Vue.resolveComponent('renderless-pagination');
 
-        </renderless-pagination>
+        return Vue.h(RLPagination, {}, {
+                default: function (props) {
+                    return props.override ? Vue.h(
+                        props.override,
+                        {
+                            props
+                        }
+                    ) : template(props)(Vue.h)
+                }
+        })
     },
     props: {
-        value: {
+        modelValue: {
             type: Number,
             required: true,
             validator(val) {
-                return val>0;
+                return val > 0;
             }
         },
         records: {

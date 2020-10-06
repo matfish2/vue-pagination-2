@@ -1,6 +1,6 @@
 import defaultOptions from './config';
 import merge from 'merge';
-import {emit} from "vue"
+
 export default {
     inject: ['Page', 'records','perPage'],
     props: {
@@ -114,7 +114,7 @@ export default {
                 }
             }
 
-            emit('paginate', val)
+            this.$parent.$emit('paginate', val)
         }
     },
     computed: {
@@ -129,9 +129,9 @@ export default {
         },
         Theme() {
 
-            if (typeof this.opts.theme === 'object') {
-                return this.opts.theme;
-            }
+            // if (typeof this.opts.theme === 'object') {
+            //     return this.opts.theme;
+            // }
 
             var themes = {
                 bootstrap3: require('./themes/bootstrap3'),
@@ -139,9 +139,9 @@ export default {
                 bulma: require('./themes/bulma')
             }
 
-            if (typeof themes[this.opts.theme] === undefined) {
-                throw `vue-pagination-2: the theme ${this.opts.theme} does not exist`;
-            }
+            // if (typeof themes[this.opts.theme] === undefined) {
+            //     throw `vue-pagination-2: the theme ${this.opts.theme} does not exist`;
+            // }
 
             return themes[this.opts.theme];
         },
@@ -207,10 +207,11 @@ export default {
             }
         },
         paginate(page) {
-            this.$parent.$emit('input', page);
+            this.$parent.$emit('update:modelValue', page);
 
             this.$nextTick(() => {
-                this.$el.querySelector('li.active a').focus();
+                console.log(this.$el)
+                // this.$el.querySelector('li.active a').focus();
             });
         },
         next: function () {
