@@ -1,6 +1,6 @@
 import template from './template'
 import RenderlessPagination from "./RenderlessPagination";
-
+import {h} from 'vue'
 export default {
     name: 'Pagination',
     components: {RenderlessPagination},
@@ -11,18 +11,20 @@ export default {
           records: () => this.records
       }
     },
-    render(h) {
-        return <renderless-pagination scopedSlots={
-            {
-                default: function (props) {
-                    return props.override ? h(
-                        props.override,
-                        {
-                            attrs: {props}
+    render() {
+        // return h('div',{},
+        //     'hello');
+        return <renderless-pagination slots={
+                    {
+                        default: function (props) {
+                            return props.override ? h(
+                                props.override,
+                                {
+                                    attrs: {props}
+                                }
+                            ) : template(props)(h)
                         }
-                    ) : template(props)(h)
-                }
-            }
+                    }
         }
         >
 

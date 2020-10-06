@@ -12,6 +12,8 @@ var _merge = require("merge");
 
 var _merge2 = _interopRequireDefault(_merge);
 
+var _vue = require("vue");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && _typeof(Symbol.iterator) === "symbol") { _typeof = function (_typeof2) { function _typeof(_x) { return _typeof2.apply(this, arguments); } _typeof.toString = function () { return _typeof2.toString(); }; return _typeof; }(function (obj) { return typeof obj === "undefined" ? "undefined" : _typeof(obj); }); } else { _typeof = function (_typeof3) { function _typeof(_x2) { return _typeof3.apply(this, arguments); } _typeof.toString = function () { return _typeof3.toString(); }; return _typeof; }(function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj); }); } return _typeof(obj); }
@@ -27,7 +29,7 @@ exports.default = {
   render: function render() {
     var _this = this;
 
-    return this.$scopedSlots.default({
+    return this.$slots.default({
       override: this.opts.template,
       showPagination: this.totalPages > 1,
       pages: this.pages,
@@ -133,7 +135,7 @@ exports.default = {
         }
       }
 
-      this.$emit('paginate', val);
+      (0, _vue.emit)('paginate', val);
     }
   },
   computed: {

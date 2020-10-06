@@ -36,18 +36,20 @@ exports.default = {
       }
     };
   },
-  render: function render(h) {
-    return (0, _vue.createVNode)((0, _vue.resolveComponent)("renderless-pagination"), {
-      "scopedSlots": {
+  render: function render() {
+    // return h('div',{},
+    //     'hello');
+    return _vue.resolveComponent("renderless-pagination", {
+      "slots": {
         default: function _default(props) {
-          return props.override ? h(props.override, {
+          return props.override ? (0, _vue.h)(props.override, {
             attrs: {
               props: props
             }
-          }) : (0, _template2.default)(props)(h);
+          }) : (0, _template2.default)(props)(_vue.h);
         }
       }
-    }, null);
+    });
   },
   props: {
     value: {

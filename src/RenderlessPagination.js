@@ -1,6 +1,6 @@
 import defaultOptions from './config';
 import merge from 'merge';
-
+import {emit} from "vue"
 export default {
     inject: ['Page', 'records','perPage'],
     props: {
@@ -10,7 +10,7 @@ export default {
         }
     },
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             override: this.opts.template,
             showPagination: this.totalPages > 1,
             pages: this.pages,
@@ -114,7 +114,7 @@ export default {
                 }
             }
 
-            this.$emit('paginate', val)
+            emit('paginate', val)
         }
     },
     computed: {
