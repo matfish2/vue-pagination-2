@@ -1,5 +1,9 @@
 # Vue Pagination 2
 
+Using Vue 3? Check out the [new component](https://www.npmjs.com/package/v-pagination-3)
+
+-------
+
 [Click here](https://jsfiddle.net/matfish2/c9wp2k63) to see it in action.
 
 Simple, generic and non-intrusive pagination component for Vue.js version 2.
