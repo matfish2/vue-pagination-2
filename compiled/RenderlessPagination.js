@@ -15,6 +15,7 @@ var _merge2 = _interopRequireDefault(_merge);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
+  name: 'RenderlessPagination',
   inject: ['Page', 'records', 'perPage'],
   props: {
     itemClass: {
@@ -145,16 +146,19 @@ exports.default = {
       return _merge2.default.recursive((0, _config2.default)(), this.Options);
     },
     Theme: function Theme() {
-      // if (typeof this.opts.theme === 'object') {
-      //     return this.opts.theme;
-      // }
+      if (this.opts.theme instanceof Object) {
+        return this.opts.theme;
+      }
+
       var themes = {
         bootstrap3: require('./themes/bootstrap3'),
         bootstrap4: require('./themes/bootstrap4'),
         bulma: require('./themes/bulma')
-      }; // if (typeof themes[this.opts.theme] === undefined) {
-      //     throw `vue-pagination-2: the theme ${this.opts.theme} does not exist`;
-      // }
+      };
+
+      if (!themes[this.opts.theme]) {
+        throw "vue-pagination-2: the theme " + this.opts.theme + " does not exist";
+      }
 
       return themes[this.opts.theme];
     },
@@ -207,12 +211,9 @@ exports.default = {
       }
     },
     paginate: function paginate(page) {
-      var _this2 = this;
-
-      this.$parent.$emit('update:modelValue', page);
-      this.$nextTick(function () {
-        console.log(_this2.$el); // this.$el.querySelector('li.active a').focus();
-      });
+      this.$parent.$emit('update:modelValue', page); // this.$nextTick(() => {
+      //     this.$el.querySelector('li.active button').focus();
+      // });
     },
     next: function next() {
       return this.setPage(this.page + 1);

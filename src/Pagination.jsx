@@ -1,6 +1,6 @@
 import template from './template'
 import RenderlessPagination from "./RenderlessPagination";
-
+import {h} from 'vue'
 
 export default {
     name: 'Pagination',
@@ -13,16 +13,14 @@ export default {
         }
     },
     render() {
-        const RLPagination = Vue.resolveComponent('renderless-pagination');
-
-        return Vue.h(RLPagination, {}, {
+        return h(RenderlessPagination, {}, {
                 default: function (props) {
-                    return props.override ? Vue.h(
+                    return props.override ? h(
                         props.override,
                         {
                             props
                         }
-                    ) : template(props)(Vue.h)
+                    ) : template(props)(h)
                 }
         })
     },
@@ -40,17 +38,10 @@ export default {
         },
         perPage: {
             type: Number,
-            default: 25
+            required: true
         },
         options: {
             type: Object
-        }
-    },
-    data: function () {
-        return {
-            aProps: {
-                role: "button"
-            }
         }
     }
 }

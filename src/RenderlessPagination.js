@@ -2,6 +2,7 @@ import defaultOptions from './config';
 import merge from 'merge';
 
 export default {
+    name:'RenderlessPagination',
     inject: ['Page', 'records','perPage'],
     props: {
         itemClass: {
@@ -129,9 +130,9 @@ export default {
         },
         Theme() {
 
-            // if (typeof this.opts.theme === 'object') {
-            //     return this.opts.theme;
-            // }
+            if (this.opts.theme instanceof Object) {
+                return this.opts.theme;
+            }
 
             var themes = {
                 bootstrap3: require('./themes/bootstrap3'),
@@ -139,9 +140,9 @@ export default {
                 bulma: require('./themes/bulma')
             }
 
-            // if (typeof themes[this.opts.theme] === undefined) {
-            //     throw `vue-pagination-2: the theme ${this.opts.theme} does not exist`;
-            // }
+            if (!themes[this.opts.theme]) {
+                throw `vue-pagination-2: the theme ${this.opts.theme} does not exist`;
+            }
 
             return themes[this.opts.theme];
         },
@@ -209,10 +210,9 @@ export default {
         paginate(page) {
             this.$parent.$emit('update:modelValue', page);
 
-            this.$nextTick(() => {
-                console.log(this.$el)
-                // this.$el.querySelector('li.active a').focus();
-            });
+            // this.$nextTick(() => {
+            //     this.$el.querySelector('li.active button').focus();
+            // });
         },
         next: function () {
             return this.setPage(this.page + 1);

@@ -12,7 +12,8 @@ module.exports = function (props) {
     var items = this.pages.map(function (page) {
       return (0, _vue.createVNode)("li", {
         "class": "VuePagination__pagination-item " + theme.page + " " + this.activeClass(page),
-        "onClick": this.setPage.bind(this, page)
+        "onClick": this.setPage.bind(this, page),
+        "onKeyDown": this.pageEvents(page).keydown
       }, [(0, _vue.createVNode)("button", {
         "class": theme.link + " " + this.activeClass(page)
       }, [this.formatNumber(page)])]);
@@ -60,7 +61,8 @@ module.exports = function (props) {
       "class": "VuePagination " + theme.wrapper
     }, [(0, _vue.createVNode)("nav", {
       "class": "" + theme.nav
-    }, [(0, _vue.withDirectives)((0, _vue.createVNode)("ul", {
+    }, [(0, _vue.createVNode)("ul", {
+      "style": this.totalPages > 1 ? '' : 'display:none',
       "class": theme.list + " VuePagination__pagination"
     }, [firstPage, prevChunk, (0, _vue.createVNode)("li", {
       "class": "VuePagination__pagination-item " + theme.page + " " + theme.prev + " VuePagination__pagination-item-prev-page " + this.allowedPageClass(this.page - 1),
@@ -74,8 +76,9 @@ module.exports = function (props) {
     }, [(0, _vue.createVNode)("a", {
       "class": theme.link,
       "disabled": !!this.allowedPageClass(this.page + 1)
-    }, [this.opts.texts.nextPage])]), nextChunk, lastPage]), [[_vue.vShow, this.totalPages > 1]]), (0, _vue.withDirectives)((0, _vue.createVNode)("p", {
+    }, [this.opts.texts.nextPage])]), nextChunk, lastPage]), (0, _vue.createVNode)("p", {
+      "style": parseInt(this.records) ? '' : 'display:none',
       "class": "VuePagination__count " + theme.count
-    }, [this.count]), [[_vue.vShow, parseInt(this.records)]])])]);
+    }, [this.count])])]);
   }.bind(props);
 };

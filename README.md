@@ -1,8 +1,6 @@
-# Vue Pagination 2
+# Vue Pagination 3
 
-[Click here](https://jsfiddle.net/matfish2/c9wp2k63) to see it in action.
-
-Simple, generic and non-intrusive pagination component for Vue.js version 2.
+Simple, generic and non-intrusive pagination component for Vue.js version 3.
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
@@ -15,30 +13,29 @@ Simple, generic and non-intrusive pagination component for Vue.js version 2.
     - [Custom Template](#custom-template)
 # Dependencies
 
-* Vue.js (>=2.0.0 && <3.0.0). Required.
-* CSS: Bootstrap 3 or Bootstrap 4 or Bulma.
+* Vue.js (>=3.0.0). Required.
+* CSS: Bootstrap 3 or Bootstrap 4 or Bulma or a custom theme.
 
 # Installation
 
 ## NPM
 
-    npm install vue-pagination-2
+    npm install vue-pagination-3
 
 import the script:
 
-    import Pagination from 'vue-pagination-2';
+    import Pagination from 'vue-pagination-3';
 
 ## Script tag
 
-Grab the minified version under `dist/vue-pagination-2.min.js`. 
-It will export a global `Pagination` variable. 
+COMING SOON
 
 # Usage
 
-### Register the component globally or locally:
+Register the component globally or locally:
 
 ```js
-Vue.component('pagination', Pagination);
+app.component('pagination', Pagination);
 ```
 
 OR
@@ -51,7 +48,7 @@ components: {
 ...
 ```
 
-HTML/JS:
+Declare the data property to be used in `v-model`:
 ```js
 {
     data() {
@@ -62,13 +59,14 @@ HTML/JS:
 }
 ```
 
+Declare the component:
 ```vue
-<pagination v-model="page" :records="500" @paginate="myCallback"/>
+<pagination v-model="page" :records="500" :per-page="25" @paginate="myCallback"/>
 ```
 props:
 
 * `records` `number` `required` number of records
-* `per-page` `number` `optional` records per page. Default: `25`
+* `per-page` `number` `required` records per page. 
 * `v-model` `number` `required` Reference to the current page. Can be updated via the UI or programmatically
 * `options` `object` `optional`:
   * `chunk` `number` max pages per chunk. Default: `10`
@@ -97,7 +95,7 @@ props:
 
 The model you bound to the component will be automatically updated. 
 In addition, when a page is selected a custom `paginate` event will be dispatched.
-Listen to it on the component and run your callback
+Listen to it on the component and run your callback (`@paginate="myCallback($event)"`)
 
 ## Programmatic Manipulation
 

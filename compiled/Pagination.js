@@ -12,6 +12,8 @@ var _RenderlessPagination = require("./RenderlessPagination");
 
 var _RenderlessPagination2 = _interopRequireDefault(_RenderlessPagination);
 
+var _vue = require("vue");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -35,12 +37,11 @@ exports.default = {
     };
   },
   render: function render() {
-    var RLPagination = Vue.resolveComponent('renderless-pagination');
-    return Vue.h(RLPagination, {}, {
+    return (0, _vue.h)(_RenderlessPagination2.default, {}, {
       default: function _default(props) {
-        return props.override ? Vue.h(props.override, {
+        return props.override ? (0, _vue.h)(props.override, {
           props: props
-        }) : (0, _template2.default)(props)(Vue.h);
+        }) : (0, _template2.default)(props)(_vue.h);
       }
     });
   },
@@ -58,18 +59,11 @@ exports.default = {
     },
     perPage: {
       type: Number,
-      default: 25
+      required: true
     },
     options: {
       type: Object
     }
-  },
-  data: function data() {
-    return {
-      aProps: {
-        role: "button"
-      }
-    };
   }
 };
 module.exports = exports["default"];
