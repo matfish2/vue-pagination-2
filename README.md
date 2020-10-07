@@ -20,11 +20,11 @@ Simple, generic and non-intrusive pagination component for Vue.js version 3.
 
 ## NPM
 
-    npm install vue-pagination-3
+    npm install v-pagination-3
 
 import the script:
 
-    import Pagination from 'vue-pagination-3';
+    import Pagination from 'v-pagination-3';
 
 ## Script tag
 
