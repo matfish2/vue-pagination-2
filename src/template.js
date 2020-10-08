@@ -55,16 +55,16 @@ module.exports = function(props) {
     {prevChunk}
     <li class={`VuePagination__pagination-item ${theme.page} ${theme.prev} VuePagination__pagination-item-prev-page ${this.allowedPageClass(this.page-1)}`}
     onClick={this.prev.bind(this)}>
-    <a class={theme.link}
+    <button type="button" class={theme.link}
     disabled={!!this.allowedPageClass(this.page-1)}
-    >{this.opts.texts.prevPage}</a>
+    >{this.opts.texts.prevPage}</button>
     </li>
     {items}
     <li class={`VuePagination__pagination-item ${theme.page} ${theme.next} VuePagination__pagination-item-next-page ${this.allowedPageClass(this.page+1)}`}
     onClick={this.next.bind(this)}>
-    <a class={theme.link}
+    <button type="button" class={theme.link}
     disabled={!!this.allowedPageClass(this.page+1)}
-    >{this.opts.texts.nextPage}</a>
+    >{this.opts.texts.nextPage}</button>
     </li>
     {nextChunk}
     {lastPage}

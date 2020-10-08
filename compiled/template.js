@@ -67,13 +67,15 @@ module.exports = function (props) {
     }, [firstPage, prevChunk, (0, _vue.createVNode)("li", {
       "class": "VuePagination__pagination-item " + theme.page + " " + theme.prev + " VuePagination__pagination-item-prev-page " + this.allowedPageClass(this.page - 1),
       "onClick": this.prev.bind(this)
-    }, [(0, _vue.createVNode)("a", {
+    }, [(0, _vue.createVNode)("button", {
+      "type": "button",
       "class": theme.link,
       "disabled": !!this.allowedPageClass(this.page - 1)
     }, [this.opts.texts.prevPage])]), items, (0, _vue.createVNode)("li", {
       "class": "VuePagination__pagination-item " + theme.page + " " + theme.next + " VuePagination__pagination-item-next-page " + this.allowedPageClass(this.page + 1),
       "onClick": this.next.bind(this)
-    }, [(0, _vue.createVNode)("a", {
+    }, [(0, _vue.createVNode)("button", {
+      "type": "button",
       "class": theme.link,
       "disabled": !!this.allowedPageClass(this.page + 1)
     }, [this.opts.texts.nextPage])]), nextChunk, lastPage]), (0, _vue.createVNode)("p", {
