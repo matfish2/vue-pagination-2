@@ -2,7 +2,7 @@ import defaultOptions from './config';
 import merge from 'merge';
 
 export default {
-    inject: ['Page', 'records','perPage'],
+    inject: ['Page', 'records', 'perPage'],
     props: {
         itemClass: {
             required: false,
@@ -108,7 +108,7 @@ export default {
             if (this.opts.chunksNavigation === 'scroll' && this.allowedPage(val) && !this.inDisplay(val)) {
                 if (val === this.totalPages) {
                     var first = val - this.opts.chunk + 1;
-                    this.firstPage = first >=1 ? first : 1;
+                    this.firstPage = first >= 1 ? first : 1;
                 } else {
                     this.firstPage = val;
                 }
@@ -210,7 +210,9 @@ export default {
             this.$parent.$emit('input', page);
 
             this.$nextTick(() => {
-                this.$el.querySelector('li.active a').focus();
+                if (this.$el) {
+                    this.$el.querySelector('li.active a').focus();
+                }
             });
         },
         next: function () {

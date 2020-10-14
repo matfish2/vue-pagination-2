@@ -227,7 +227,9 @@ exports.default = {
             this.$parent.$emit('input', page);
 
             this.$nextTick(function () {
-                _this2.$el.querySelector('li.active a').focus();
+                if (_this2.$el) {
+                    _this2.$el.querySelector('li.active a').focus();
+                }
             });
         },
 
