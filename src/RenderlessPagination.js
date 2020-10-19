@@ -78,7 +78,7 @@ export default {
                 page: `${this.itemClass} ${this.Theme.item}`,
                 wrapper: this.Theme.wrapper,
                 count: `VuePagination__count ${this.Theme.count}`,
-                item: This.Theme.item
+                item: this.Theme.item
             },
             hasRecords: this.hasRecords,
             count: this.count,
