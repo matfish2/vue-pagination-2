@@ -77,7 +77,8 @@ export default {
                 link: this.Theme.link,
                 page: `${this.itemClass} ${this.Theme.item}`,
                 wrapper: this.Theme.wrapper,
-                count: `VuePagination__count ${this.Theme.count}`
+                count: `VuePagination__count ${this.Theme.count}`,
+                item: This.Theme.item
             },
             hasRecords: this.hasRecords,
             count: this.count,
