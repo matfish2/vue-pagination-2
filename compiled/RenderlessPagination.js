@@ -87,6 +87,8 @@ exports.default = {
             theme: {
                 nav: this.Theme.nav,
                 list: 'VuePagination__pagination ' + this.Theme.list,
+                item: this.Theme.item,
+                disabled: this.Theme.disabled,
                 prev: this.itemClass + ' ' + this.itemClass + '-prev-page ' + this.Theme.item + ' ' + this.Theme.prev + ' ' + this.allowedPageClass(this.page - 1),
                 next: this.itemClass + '  ' + this.itemClass + '-next-page ' + this.Theme.item + ' ' + this.Theme.next + ' ' + this.allowedPageClass(this.page + 1),
                 prevChunk: this.itemClass + ' ' + this.Theme.item + ' ' + this.Theme.prev + ' ' + this.itemClass + '-prev-chunk ' + this.allowedChunkClass(-1),
