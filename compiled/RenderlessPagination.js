@@ -134,7 +134,7 @@ exports.default = {
                 }
             }
 
-            this.$emit('paginate', val);
+            this.$parent.$emit('paginate', val);
         }
     },
     computed: {
