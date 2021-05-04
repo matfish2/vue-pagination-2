@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
-    "merge": "^1.2.0",
+    "merge": "^2.1.1",
     "vue": ">=2.0.0",
     "vuex": "^2.0.0"
   },
