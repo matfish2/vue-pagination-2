@@ -14,7 +14,9 @@ export default {
         }
     },
     render() {
-        return h(RenderlessPagination, {}, {
+        return h(RenderlessPagination, {
+            ref:'pg'
+        }, {
                 default: function (props) {
                     return props.override ? h(
                         props.override,
@@ -24,6 +26,11 @@ export default {
                     ) : template(props)(h)
                 }
         })
+    },
+    methods:{
+      setPage(page) {
+          this.$refs.pg.setPage(page)
+      }
     },
     props: {
         modelValue: {

@@ -38,13 +38,20 @@ exports.default = {
     };
   },
   render: function render() {
-    return (0, _vue.h)(_RenderlessPagination2.default, {}, {
+    return (0, _vue.h)(_RenderlessPagination2.default, {
+      ref: 'pg'
+    }, {
       default: function _default(props) {
         return props.override ? (0, _vue.h)(props.override, {
           props: props
         }) : (0, _template2.default)(props)(_vue.h);
       }
     });
+  },
+  methods: {
+    setPage: function setPage(page) {
+      this.$refs.pg.setPage(page);
+    }
   },
   props: {
     modelValue: {
