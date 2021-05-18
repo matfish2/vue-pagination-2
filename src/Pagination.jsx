@@ -4,6 +4,7 @@ import {h} from 'vue'
 
 export default {
     name: 'Pagination',
+    emits:['update:modelValue','paginate'],
     components: {RenderlessPagination},
     provide() {
         return {

@@ -18,6 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
   name: 'Pagination',
+  emits: ['update:modelValue', 'paginate'],
   components: {
     RenderlessPagination: _RenderlessPagination2.default
   },
