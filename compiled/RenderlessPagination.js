@@ -230,7 +230,7 @@ exports.default = {
 
             this.$nextTick(function () {
                 if (_this2.$el) {
-                    _this2.$el.querySelector('li.active a').focus();
+                    _this2.$el.querySelector('li.' + _this2.Theme.active + ' a').focus();
                 }
             });
         },

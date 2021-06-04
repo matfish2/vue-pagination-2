@@ -213,7 +213,7 @@ export default {
 
             this.$nextTick(() => {
                 if (this.$el) {
-                    this.$el.querySelector('li.active a').focus();
+                    this.$el.querySelector(`li.${this.Theme.active} a`).focus();
                 }
             });
         },
