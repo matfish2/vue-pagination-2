@@ -1,7 +1,7 @@
 {
   "name": "v-pagination-3",
   "description": "Vue.js 3 pagination component",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "keywords": [
     "pagination",
     "vuejs3",

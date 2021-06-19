@@ -99,7 +99,7 @@ export default {
     },
     data: function () {
         return {
-            firstPage: this.$parent.value,
+            firstPage: this.$parent.modelValue,
             For: this.$parent.for,
             Options: this.$parent.options
         }
