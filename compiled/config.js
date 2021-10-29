@@ -12,6 +12,7 @@ exports.default = function () {
     edgeNavigation: false,
     theme: 'bootstrap3',
     template: null,
+    hideCount: false,
     texts: {
       count: 'Showing {from} to {to} of {count} records|{count} records|One record',
       first: 'First',

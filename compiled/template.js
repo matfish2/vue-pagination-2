@@ -9,6 +9,10 @@ module.exports = function (props) {
     var nextChunk = '';
     var firstPage = '';
     var lastPage = '';
+    var countText = props.opts.hideCount ? '' : (0, _vue.createVNode)("p", {
+      "style": parseInt(this.records) ? '' : 'display:none',
+      "class": "VuePagination__count " + theme.count
+    }, [this.count]);
     var items = this.pages.map(function (page) {
       return (0, _vue.createVNode)("li", {
         "class": "VuePagination__pagination-item " + theme.page + " " + this.activeClass(page),
@@ -78,9 +82,6 @@ module.exports = function (props) {
       "type": "button",
       "class": theme.link,
       "disabled": !!this.allowedPageClass(this.page + 1)
-    }, [this.opts.texts.nextPage])]), nextChunk, lastPage]), (0, _vue.createVNode)("p", {
-      "style": parseInt(this.records) ? '' : 'display:none',
-      "class": "VuePagination__count " + theme.count
-    }, [this.count])])]);
+    }, [this.opts.texts.nextPage])]), nextChunk, lastPage]), countText])]);
   }.bind(props);
 };

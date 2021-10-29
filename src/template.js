@@ -7,6 +7,9 @@ module.exports = function(props) {
     var firstPage = '';
     var lastPage = '';
 
+    var countText = props.opts.hideCount ? '' : <p style={parseInt(this.records) ? '' : 'display:none'}
+    class={`VuePagination__count ${theme.count}`}>{this.count}</p>
+
     var items = this.pages.map(function(page) {
       return <li class={`VuePagination__pagination-item ${theme.page} ${this.activeClass(page)}`}
       onClick={this.setPage.bind(this, page)}
@@ -69,8 +72,7 @@ module.exports = function(props) {
     {nextChunk}
     {lastPage}
     </ul>
-    <p style={parseInt(this.records) ? '' : 'display:none'}
-    class={`VuePagination__count ${theme.count}`}>{this.count}</p>
+      {countText}
     </nav>
     </div>
   }.bind(props)

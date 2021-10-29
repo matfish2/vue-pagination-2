@@ -77,6 +77,7 @@ props:
   * `format` `boolean` Format numbers using a separating comma. Default: `true`
   * `edgeNavigation` Show links to first and last pages. Default: `false`
   * `template` Pass your own [custom template](#custom-template)
+  * `hideCount` hide the count text. Default `false`
   * `texts` `object` `optional` 
     * `count` total records text. It can consist of up to 3 parts, divided by `|`.
       * First part: used when there are multiple pages

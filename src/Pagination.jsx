@@ -1,6 +1,6 @@
 import template from './template'
 import RenderlessPagination from "./RenderlessPagination";
-import {h} from 'vue'
+import {h,ref} from 'vue'
 
 export default {
     name: 'Pagination',
